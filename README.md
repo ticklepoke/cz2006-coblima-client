@@ -1,3 +1,5 @@
+# CZ2006 COBLIMA Client [![Build Status](http://34.87.46.94:8080/buildStatus/icon?job=coblima-client)](http://34.87.46.94:8080/job/coblima-client/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
