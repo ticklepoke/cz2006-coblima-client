@@ -1,0 +1,60 @@
+/* Italicise placeholder */
+::-webkit-input-placeholder {
+    font-style: italic;
+ }
+ :-moz-placeholder {
+    font-style: italic;  
+ }
+ ::-moz-placeholder {
+    font-style: italic;  
+ }
+ :-ms-input-placeholder {  
+    font-style: italic; 
+ }
+
+/* Disable highlight for input and button fields */
+ input:focus, textarea:focus, select:focus, button:focus {
+    outline: none;
+}
+
+/* Add button focus on hover */ 
+button:hover {
+    font-size: 47px;
+    transition: font-size 0.2s;
+}
+
+.searchbar {
+    z-index: 1;
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    width: 55%;
+    height: 6.6%;
+    background-color: white;
+    /* border: 1px solid grey; */
+    filter: drop-shadow(3px 5px 4px grey);
+    border-radius: 50px;
+    padding: 1%;
+}
+
+.search-input-text {
+    border: none;
+    height: 100%;
+    width: 87%;
+    font-size: 35px;
+    /* float: left; */
+    padding-left: 25px;
+    background-color: none;
+    margin-top: 15px;
+}
+
+.submit-button {
+    height: 50px;
+    width: 7%;
+    font-size: 35px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: -5px;
+    color: grey;
+}
