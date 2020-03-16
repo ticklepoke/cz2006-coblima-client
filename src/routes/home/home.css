@@ -1,3 +1,5 @@
+
+
 .App {
   text-align: center;
 }
@@ -11,7 +13,29 @@
 
 .coblima-header {
   color: white;
+  font-family: FiraSans;
   position: absolute;
-  top: 10px;
-  left: 40px;
+  top: 3%;
+  left: 3%;
+}
+
+.searchbar {
+  z-index: 1;
+  position: absolute;
+  top: 60%;
+  left: 30%;
+}
+
+.form-button {
+  position: absolute;
+  top: 3%;
+  width: 8%;
+}
+
+.login-button {
+  right: 13%;
+}
+
+.register-button {
+  right: 4%;
 }

@@ -6,6 +6,8 @@ import {
   Link
 } from "react-router-dom";
 
+import '../../assets/css/bootstrap.css';
+
 import Query from "../query/query"
 import Course from "../course/course"
 import Home from "../home/home"
