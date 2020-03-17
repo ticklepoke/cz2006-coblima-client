@@ -1,21 +1,14 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import '../../assets/css/bootstrap.css';
+import "../../assets/css/bootstrap.css";
 
-import Query from "../query/query"
-import Course from "../course/course"
-import Home from "../home/home"
-import Login from "../login/login"
-import Register from "../register/register"
-import Profile from "../profile/profile"
-
-
+import Query from "../query/query";
+import Course from "../course/course";
+import Home from "../home/home";
+import Login from "../login/login";
+import Register from "../register/register";
+import Profile from "../profile/profile";
 
 export default function App() {
   return (
