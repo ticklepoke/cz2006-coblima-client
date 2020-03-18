@@ -13,25 +13,27 @@ function App() {
       <img src={home} className="home-image" alt="home" />
 
       {/* Header Tab */}
-      <Title color="white"/>
-      <Link to="/login">
-        <Button
-          variant="secondary"
-          size="lg"
-          className="form-button login-button"
-        >
-          Login
-        </Button>
-      </Link>
-      <Link to="/register">
-        <Button
-          variant="primary"
-          size="lg"
-          className="form-button register-button"
-        >
-          Register
-        </Button>
-      </Link>
+      <Title color="white" />
+      <div className="buttons">
+        <Link to="/register">
+          <Button
+            variant="primary"
+            size="lg"
+            className="form-button register-button"
+          >
+            REGISTER
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button
+            variant="secondary"
+            size="lg"
+            className="form-button login-button"
+          >
+            LOGIN
+          </Button>
+        </Link>
+      </div>
 
       <Searchbar className="searchbar" />
     </div>

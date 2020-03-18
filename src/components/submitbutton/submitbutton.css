@@ -1,11 +1,12 @@
-.submit-button{
-    background-color: rgba(95, 88, 204, 0.8);
-    font-size: 1.6em;
-    height: 60px;
-    width: 90%;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    /* box-shadow: 3px 3px black; */
-    filter: drop-shadow(3px 6px 3px grey)
+.submit-button {
+  background-color: rgba(95, 88, 204, 0.8);
+  font-family: ReemKufi;
+  font-size: 1.6em;
+  height: 60px;
+  width: 90%;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  /* box-shadow: 3px 3px black; */
+  filter: drop-shadow(3px 6px 3px grey);
 }

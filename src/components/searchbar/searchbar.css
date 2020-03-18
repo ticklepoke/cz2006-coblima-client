@@ -21,43 +21,42 @@ button:focus {
 }
 
 /* Add button focus on hover */
-.submit-buttons:hover {
-  font-size: 42px;
-  transition: font-size 0.2s;
+.submit-logo:hover {
+  transform: scale(1.2);
+  transition: transform 0.1s;
 }
 
 .searchbar {
+  display: flex;
+  align-items: center;
   width: 55%;
-  height: 8.6%;
   background-color: white;
   filter: drop-shadow(3px 5px 4px grey);
   border-radius: 50px;
+  padding: 10px 25px;
+}
+
+.searchbar-form {
+  display: flex;
+  width: 100%;
 }
 
 .search-input-text {
+  z-index: 3;
   border: none;
   height: 100%;
   width: 100%;
   font-size: 30px;
   float: left;
-  margin-left: 25px;
   background-color: none;
-  margin-top: 15px;
 }
 
-.submit-buttons {
-  height: 50px;
-  width: 7%;
+.submit-logo {
+  z-index: 2;
+  display: flex;
   font-size: 30px;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-  margin-top: 12px;
-  margin-right: 10px;
   color: grey;
   float: right;
-}
-
-.form-label {
-  width: 87%;
-  float: left;
 }
