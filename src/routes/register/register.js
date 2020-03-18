@@ -11,6 +11,32 @@ class Register extends Component {
     super(props);
     this.state = {};
   }
+
+  handleUsernameChange = (event) => {
+    this.setState({username: event.target.value});
+  }
+
+  handlePasswordChange = (event) => {
+    this.setState({password: event.target.value});
+  }
+
+  handleConfirmPasswordChange = (event) => {
+    this.setState({confirmPassword: event.target.value});
+  }
+
+  handleMatriculationChange = (event) => {
+    this.setState({matriculation: event.target.value});
+  }
+
+  handleSubmit = event => {
+    if (this.state.password === this.state.confirmPassword) {
+      alert("Password Matches, Username: " + this.state.username + " Password: " + this.state.password);
+    } else {
+      alert("Error: Password does not match");
+    }
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div className="register-container">
@@ -27,11 +53,11 @@ class Register extends Component {
             </Link>
 
             <form>
-              <Inputbar text="Username" />
-              <Inputbar text="Matriculation Number" />
-              <Inputbar text="Password" />
-              <Inputbar text="Confirm Password" />
-              <Submitbutton text="Register" />
+              <Inputbar text="Username" changeInput={this.handleUsernameChange}/>
+              <Inputbar text="Matriculation Number" changeInput={this.handleMatriculationChange}/>
+              <Inputbar text="Password" changeInput={this.handlePasswordChange}/>
+              <Inputbar text="Confirm Password" changeInput={this.handleConfirmPasswordChange}/>
+              <Submitbutton text="Register" clickedSubmit={this.handleSubmit}/>
             </form>
           </div>
         </div>
