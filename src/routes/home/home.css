@@ -11,14 +11,6 @@
   left: 0;
 }
 
-.coblima-header {
-  color: white;
-  font-family: FiraSans;
-  position: absolute;
-  top: 3%;
-  left: 3%;
-}
-
 .searchbar {
   z-index: 1;
   position: absolute;
