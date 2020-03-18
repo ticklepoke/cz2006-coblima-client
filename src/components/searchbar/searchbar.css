@@ -33,12 +33,13 @@ button:focus {
   background-color: white;
   filter: drop-shadow(3px 5px 4px grey);
   border-radius: 50px;
-  padding: 10px 25px;
+  padding: 25px 40px;
 }
 
 .searchbar-form {
   display: flex;
   width: 100%;
+  font-family: ReemKufi;
 }
 
 .search-input-text {

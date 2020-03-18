@@ -7,6 +7,5 @@
   color: white;
   border: none;
   border-radius: 50px;
-  /* box-shadow: 3px 3px black; */
   filter: drop-shadow(3px 6px 3px grey);
 }

@@ -1,11 +1,11 @@
-.login-container {
+.register-container {
   width: 100%;
   margin: 0 auto;
   padding: 0;
   margin: 0;
 }
 
-.login-left-column {
+.register-left-column {
   height: 100%;
   width: 50%;
   position: absolute;
@@ -13,7 +13,7 @@
   /* background-color: pink; */
 }
 
-.login-right-column {
+.register-right-column {
   height: 100%;
   width: 50%;
   position: absolute;
@@ -21,29 +21,29 @@
   background-color: rgba(108, 99, 255, 0.6);
 }
 
-.login-logo {
+.register-logo {
   position: absolute;
   top: 30%;
   left: 15%;
   width: 70%;
 }
 
-.login-right-container {
+.register-right-container {
   width: 60%;
   height: 70%;
   position: absolute;
-  top: 20%;
+  top: 12%;
   left: 20%;
   color: white;
   /* border: 1px solid black; */
 }
 
-.login-header {
+.register-header {
   font-family: Limelight;
   font-size: 4em;
 }
 
-.login-subheader {
+.register-subheader {
   font-family: ReemKufi;
   font-size: 1.1em;
   color: white;
