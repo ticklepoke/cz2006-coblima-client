@@ -7,7 +7,7 @@
 
 .login-left-column {
   height: 100%;
-  width: 50%;
+  width: 55%;
   position: absolute;
   float: left;
   /* background-color: pink; */
@@ -15,7 +15,7 @@
 
 .login-right-column {
   height: 100%;
-  width: 50%;
+  width: 45%;
   position: absolute;
   right: 0;
   background-color: rgba(108, 99, 255, 0.6);

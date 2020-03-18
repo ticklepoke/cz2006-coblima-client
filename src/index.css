@@ -8,6 +8,32 @@
   src: local('Limelight'), url(assets/fonts/Limelight-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Limelight';
+  src: local('Limelight'), url(assets/fonts/Limelight-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(assets/fonts/Roboto-ThinItalic.ttf) format('truetype');
+  font-style: italic;
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(assets/fonts/Roboto-MediumItalic.ttf) format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(assets/fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
