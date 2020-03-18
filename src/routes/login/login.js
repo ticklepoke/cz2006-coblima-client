@@ -44,9 +44,6 @@ class Login extends Component {
               <Inputbar text="Username" changeInput={this.handleUsernameChange} />
               <Inputbar text="Password" changeInput={this.handlePasswordChange} />
               <Submitbutton text="Login" clickedSubmit={this.handleSubmit} />
-              {this.state.password}
-              Username
-              {this.state.username}
             </form>
           </div>
         </div>
