@@ -1,0 +1,16 @@
+.status-container {
+    position: absolute;
+    top: 40px;
+    right: 110px;
+}
+
+.status-name {
+    float: left;
+    margin-right: 15px;
+    color: #777;
+    font-family: ReemKufi;
+}
+
+.status-arrow {
+    padding-top: 10px;
+}

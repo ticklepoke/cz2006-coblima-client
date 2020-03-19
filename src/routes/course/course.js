@@ -8,6 +8,7 @@ import credits from "../../images/credits.svg";
 import Title from "../../components/title/title";
 import Searchbar from "../../components/searchbar/searchbar";
 import Coursetile from "../../components/coursetile/coursetile";
+import Status from "../../components/status/status";
 
 class Course extends Component {
   constructor(props) {
@@ -19,7 +20,18 @@ class Course extends Component {
       <div className="course-container">
         <div className="course-navbar">
           <Title />
-          {/* <Searchbar /> */}
+          <Searchbar
+            className="course-searchbar"
+            searchbarStyle={{
+              "z-index": "1",
+              position: "fixed",
+              top: "30px",
+              left: "350px",
+              padding: "10px 30px",
+              width: "45%"
+            }}
+          />
+          <Status />
         </div>
         <div className="course-header">
           <div className="course-header-left">

@@ -9,12 +9,7 @@
   left: 0;
 }
 
-.searchbar {
-  z-index: 1;
-  position: absolute;
-  top: 60%;
-  left: 30%;
-}
+
 
 .buttons {
   display: flex;

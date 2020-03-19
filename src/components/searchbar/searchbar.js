@@ -23,7 +23,7 @@ class Searchbar extends React.Component {
 
   render() {
     return (
-      <div className="searchbar">
+      <div className="searchbar-container" style={this.props.searchbarStyle}>
         <form onSubmit={this.handleSubmit} className="searchbar-form">
           <input
             type="text"

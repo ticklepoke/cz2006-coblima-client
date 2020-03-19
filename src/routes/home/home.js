@@ -35,7 +35,15 @@ function App() {
         </Link>
       </div>
 
-      <Searchbar />
+      <Searchbar
+        className="home-searchbar"
+        searchbarStyle={{
+          "z-index": "1",
+          position: "absolute",
+          top: "60%",
+          left: "30%"
+        }}
+      />
     </div>
   );
 }

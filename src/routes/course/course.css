@@ -13,7 +13,7 @@
   position: fixed;
   flex-direction: row;
   top: 0px;
-  height: 100px;
+  height: 140px;
   width: 100%;
   background-color: #ffffff;
 }
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: row;
   position: fixed;
-  top: 100px;
+  top: 140px;
   height: 150px;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -92,3 +92,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.course-searchbar {
+  position: fixed;
+  left: 30%;
+}
+

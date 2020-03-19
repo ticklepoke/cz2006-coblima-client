@@ -26,7 +26,7 @@ button:focus {
   transition: transform 0.1s;
 }
 
-.searchbar {
+.searchbar-container {
   display: flex;
   align-items: center;
   width: 55%;
