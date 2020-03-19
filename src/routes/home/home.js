@@ -35,7 +35,7 @@ function App() {
         </Link>
       </div>
 
-      <Searchbar className="searchbar" />
+      <Searchbar />
     </div>
   );
 }
