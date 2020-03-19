@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./coursetile.css";
+import "./activetile.css";
 
 class Coursetile extends Component {
   render() {
     return (
-      <div className="course-header-tile">
+      <div className="course-header-tile" >
         <img
           className="course-header-tile-icon"
           src={this.props.image}

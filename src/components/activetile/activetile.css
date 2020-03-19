@@ -14,6 +14,7 @@
 .course-header-tile-icon {
   display: flex;
   margin-top: 10px;
+  fill: pink;
 }
 
 .course-header-tile-score {
