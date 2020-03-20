@@ -10,8 +10,8 @@
 .course-navbar {
   z-index: 2;
   display: flex;
-  position: fixed;
   flex-direction: row;
+  position: fixed;
   top: 0px;
   height: 140px;
   width: 100%;
@@ -60,7 +60,8 @@
 .course-body {
   display: flex;
   position: relative;
-  top: 250px;
+  top: 290px;
+  height: 100%;
   padding: 50px 0px;
 }
 
@@ -99,10 +100,17 @@
 }
 
 .toggle-show-review-button {
-  background-color: rgba(0,0,0,0);
-  border: 1px solid rgba(0,0,0,0);
-  border: 1px solid rgba(0,0,0,1);
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 1);
   padding: 0;
   margin: 0;
+}
 
+.course-body-review {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
