@@ -9,21 +9,29 @@ import Submitbutton from "../../components/submitbutton/submitbutton";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {
+      username: "",
+      password: ""
+    };
   }
 
   handleSubmit = event => {
-    alert("Submitted Username: " + this.state.username + " Submitted password: " + this.state.password);
+    alert(
+      "Submitted Username: " +
+        this.state.username +
+        " Submitted password: " +
+        this.state.password
+    );
     event.preventDefault();
   };
 
-  handleUsernameChange = (event) => {
-    this.setState({username: event.target.value});
-  }
+  handleUsernameChange = event => {
+    this.setState({ username: event.target.value });
+  };
 
-  handlePasswordChange = (event) => {
-    this.setState({password: event.target.value});
-  }
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
+  };
 
   render() {
     return (
@@ -41,8 +49,14 @@ class Login extends Component {
             </Link>
 
             <form>
-              <Inputbar text="Username" changeInput={this.handleUsernameChange} />
-              <Inputbar text="Password" changeInput={this.handlePasswordChange} />
+              <Inputbar
+                text="Username"
+                changeInput={this.handleUsernameChange}
+              />
+              <Inputbar
+                text="Password"
+                changeInput={this.handlePasswordChange}
+              />
               <Submitbutton text="Login" clickedSubmit={this.handleSubmit} />
             </form>
           </div>
