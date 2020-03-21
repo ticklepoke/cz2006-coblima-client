@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import "./course.css";
 //images
 import ActiveRating from "../../images/active-rating.svg";
@@ -50,7 +52,18 @@ class Course extends Component {
         <div className="course-header">
           <div className="course-header-left">
             <div className="course-header-title">Software Engineering</div>
-            <div className="course-header-code">CZ2006</div>
+            <div className="course-header-bot">
+              <div className="course-header-code">CZ2006</div>
+              <Link to="/review">
+                <Button
+                  variant="primary"
+                  className="course-header-button"
+                  // size="lg"
+                >
+                  ADD REVIEW
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <RenderTiles

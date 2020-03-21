@@ -1,4 +1,4 @@
-.review {
+.review-card {
   display: flex;
   flex-direction: column;
   width: 1069px;
@@ -10,12 +10,12 @@
   padding: 20px;
 }
 
-.review-top {
+.review-card-top {
   display: flex;
   height: 95px;
 }
 
-.review-top-title {
+.review-card-top-title {
   display: flex;
   font-family: ReemKufi;
   font-size: 48px;
@@ -23,17 +23,17 @@
   color: #6c63ff;
 }
 
-.review-top-stars {
+.review-card-top-stars {
   display: flex;
   margin-left: auto;
 }
 
-.review-mid {
+.review-card-mid {
   display: flex;
   height: 125px;
 }
 
-.review-mid-content {
+.review-card-mid-content {
   display: flex;
   font-family: ReemKufi;
   font-size: 24px;
@@ -41,14 +41,14 @@
   text-align: justify;
 }
 
-.review-bot {
+.review-card-bot {
   display: flex;
   height: 50px;
   align-items: flex-end;
   margin-left: auto;
 }
 
-.review-bot-date {
+.review-card-bot-date {
   display: flex;
   font-family: ReemKufi;
   font-size: 20px;

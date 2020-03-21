@@ -10,18 +10,18 @@ export class Reviewcard extends Component {
     const content = this.props.content;
     const date = this.props.date;
     return (
-      <div className="review">
-        <div className="review-top">
-          <div className="review-top-title">{title}</div>
-          <div className="review-top-stars">
+      <div className="review-card">
+        <div className="review-card-top">
+          <div className="review-card-top-title">{title}</div>
+          <div className="review-card-top-stars">
             <ReviewStars rating={rating} />
           </div>
         </div>
-        <div className="review-mid">
-          <div className="review-mid-content">{content}</div>
+        <div className="review-card-mid">
+          <div className="review-card-mid-content">{content}</div>
         </div>
-        <div className="review-bot">
-          <div className="review-bot-date">{date}</div>
+        <div className="review-card-bot">
+          <div className="review-card-bot-date">{date}</div>
         </div>
       </div>
     );

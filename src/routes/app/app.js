@@ -9,6 +9,7 @@ import Home from "../home/home";
 import Login from "../login/login";
 import Register from "../register/register";
 import Profile from "../profile/profile";
+import Review from "../review/review";
 
 export default function App() {
   return (
@@ -31,6 +32,9 @@ export default function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/review">
+            <Review />
           </Route>
           <Route path="/">
             <Home />
