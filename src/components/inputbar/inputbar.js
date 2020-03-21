@@ -11,6 +11,7 @@ class Inputbar extends React.Component {
           // value={this.state.value}
           onChange={this.props.changeInput}
           placeholder={this.props.text}
+          disabled={this.props.disabled}
         />
       </div>
     );

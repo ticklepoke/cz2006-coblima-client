@@ -47,14 +47,33 @@
   align-items: center;
 }
 
+.review-body-form-bot {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 15px 50px;
+}
+
+.review-submit-link {
+  display: flex;
+  margin-left: auto;
+}
+
+.review-submit-button {
+  display: flex;
+  font-family: ReemKufi;
+  font-size: 40px;
+  background-color: #050303;
+  border-radius: 15px;
+}
+
 .review-body-right {
   display: flex;
   width: 40%;
   align-items: center;
-  justify-content: center;
 }
 
 .review-body-right-image {
   display: flex;
-  height: 50%;
+  height: 60%;
 }

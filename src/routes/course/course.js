@@ -54,7 +54,7 @@ class Course extends Component {
             <div className="course-header-title">Software Engineering</div>
             <div className="course-header-bot">
               <div className="course-header-code">CZ2006</div>
-              <Link to="/review">
+              <Link to="/review" className="no-underline">
                 <Button className="course-header-button">ADD REVIEW</Button>
               </Link>
             </div>

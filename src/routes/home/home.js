@@ -15,7 +15,7 @@ function App() {
       {/* Header Tab */}
       <Title color="white" />
       <div className="buttons">
-        <Link to="/register">
+        <Link to="/register" className="no-underline">
           <Button
             variant="primary"
             size="lg"
@@ -24,7 +24,7 @@ function App() {
             REGISTER
           </Button>
         </Link>
-        <Link to="/login">
+        <Link to="/login" className="no-underline">
           <Button
             variant="secondary"
             size="lg"
