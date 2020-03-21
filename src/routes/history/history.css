@@ -1,0 +1,135 @@
+.course-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-navbar {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0px;
+  height: 140px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.course-header {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  position: fixed;
+  top: 140px;
+  height: 150px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.course-header-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-left: 100px;
+}
+
+.course-header-title {
+  display: flex;
+  font-family: Limelight;
+  font-size: 3em;
+  color: black;
+}
+
+.course-header-bot {
+  display: flex;
+  align-items: center;
+}
+
+.course-header-code {
+  display: flex;
+  font-family: ReemKufi;
+  font-size: 2.5em;
+  color: black;
+  margin-right: 30px;
+}
+
+.course-header-button {
+  display: flex;
+  background-color: #8580dd;
+  font-family: ReemKufi;
+  font-weight: 550;
+  font-size: 28px;
+  width: 280px;
+  justify-content: center;
+  padding: 0px 0px;
+}
+
+.course-header-right {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 80px;
+  width: 50%;
+}
+
+.course-body {
+  display: flex;
+  position: relative;
+  top: 290px;
+  height: 100%;
+  padding: 50px 0px;
+}
+
+.course-body-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 0px 100px;
+}
+
+.course-body-description {
+  display: flex;
+  font-family: Roboto;
+  font-size: 23px;
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
+.course-body-prereq {
+  display: flex;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.course-body-right {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-searchbar {
+  position: fixed;
+  left: 30%;
+}
+
+.toggle-show-review-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 1);
+  padding: 0;
+  margin: 0;
+}
+
+.course-body-review {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

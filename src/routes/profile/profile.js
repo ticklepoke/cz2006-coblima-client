@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import "./profile.css";
 import ProfileLogo from "../../images/profile.svg";
 import AvatarLogo from "../../images/avatar.svg";
@@ -26,7 +27,9 @@ class Profile extends Component {
             <p className="profile-paragraph">U1830020A</p>
             <p className="profile-paragraph">JEM0001@e.ntu.edu.sg</p>
             <button className="action-button"> Edit Password</button>
-            <button className="action-button"> View Review History</button>
+            <Link to="/history">
+              <button className="action-button"> View Review History</button>
+            </Link>
           </div>
         </div>
       </div>

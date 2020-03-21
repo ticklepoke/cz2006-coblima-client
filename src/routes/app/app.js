@@ -10,6 +10,7 @@ import Login from "../login/login";
 import Register from "../register/register";
 import Profile from "../profile/profile";
 import Review from "../review/review";
+import History from "../history/history";
 
 export default function App() {
   return (
@@ -35,6 +36,9 @@ export default function App() {
           </Route>
           <Route path="/review">
             <Review />
+          </Route>
+          <Route path="/history">
+            <History />
           </Route>
           <Route exact path="/">
             <Home />
