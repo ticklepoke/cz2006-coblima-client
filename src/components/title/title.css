@@ -1,0 +1,11 @@
+.coblima-title {
+  color: #6c63ff;
+  font-family: ReemKufi;
+  position: absolute;
+  top: 40px;
+  left: 96px;
+}
+
+.coblima-title:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,60 @@
+.review-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-navbar {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  top: 0px;
+  height: 100px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.review-body {
+  display: flex;
+  height: auto;
+  width: 100%;
+}
+
+.review-body-left {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding-left: 100px;
+}
+
+.review-body-title {
+  display: flex;
+  font-family: Limelight;
+  font-size: 3em;
+  color: black;
+}
+
+.review-body-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #a7a1ff;
+  border-radius: 32px;
+  width: 90%;
+  height: 650px;
+  margin: 20px 0px;
+  padding: 10px 0px;
+  align-items: center;
+}
+
+.review-body-right {
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-body-right-image {
+  display: flex;
+  height: 50%;
+}

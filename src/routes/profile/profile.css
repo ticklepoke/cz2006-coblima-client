@@ -1,0 +1,84 @@
+.profile-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-left-column {
+  height: 100%;
+  width: 55%;
+  position: absolute;
+  float: left;
+}
+
+.profile-right-column {
+  height: 100%;
+  width: 45%;
+  position: absolute;
+  right: 0;
+  background-color: rgba(108, 99, 255, 0.6);
+  text-align: center;
+}
+
+.profile-logo {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  width: 70%;
+}
+
+.profile-right-container {
+  width: 60%;
+  height: 70%;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  border: 1px solid green;
+  background-color: pink;
+}
+
+.profile-header {
+  font-family: Limelight;
+  font-size: 2.5em;
+  color: white;
+  text-align: center;
+}
+
+.profile-subheader {
+  font-family: ReemKufi;
+  font-size: 2.2em;
+  color: white;
+  text-align: center;
+}
+
+.profile-paragraph {
+  font-family: ReemKufi;
+  font-size: 1.2em;
+  color: white;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  margin-top: 20px;
+  margin-bottom: 14px;
+}
+
+.action-button {
+  margin: 0 auto;
+  margin-top: 17px;
+  background-color: white;
+  font-style: italic;
+  height: 47px;
+  width: 80%;
+  color: rgba(108, 99, 255, 0.6);
+  border: none;
+  border-radius: 50px;
+  filter: drop-shadow(1px 3px 5px black);
+}

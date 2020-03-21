@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.home-image {
+  /* height: 95%; */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  position: fixed;
+  height: 125px;
+  width: 100%;
+  top: 0;
+  align-items: center;
+  right: 20px;
+}
+
+.form-button {
+  display: flex;
+  flex-direction: row;
+  font-family: ReemKufi;
+  margin: 0px 10px;
+}
+
+.login-button {
+  display: flex;
+}
+
+.register-button {
+  display: flex;
+}

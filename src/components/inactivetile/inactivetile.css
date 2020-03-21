@@ -1,0 +1,35 @@
+.inactive-course-header-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 130px;
+  width: 130px;
+  background-color: white;
+  filter: drop-shadow(2px 2px 2px grey);
+  border-radius: 5px;
+  margin: 0px 30px;
+  padding: 10px 20px;
+}
+
+.inactive-course-header-tile-icon {
+  display: flex;
+  margin-top: 10px;
+}
+
+.inactive-course-header-tile-score {
+  display: flex;
+  font-family: Roboto;
+  font-size: 1.5em;
+  color: #9E9E9E;
+  justify-content: center;
+}
+
+.inactive-course-header-tile-caption {
+  display: flex;
+  font-family: Roboto;
+  font-size: 12px;
+  color: #9E9E9E;
+  opacity: 0.7;
+  margin-top: -2.5px;
+  justify-content: center;
+}

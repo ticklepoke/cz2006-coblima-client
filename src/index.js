@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './routes/app/app';
 import * as serviceWorker from './serviceWorker';
+import './assets/fonts/ReemKufi-Regular.ttf';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

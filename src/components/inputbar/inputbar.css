@@ -1,0 +1,42 @@
+/* Italicise placeholder */
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+:-moz-placeholder {
+  font-style: italic;
+}
+::-moz-placeholder {
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  font-style: italic;
+}
+
+/* Disable highlight for input and button fields */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+
+.input-bar {
+  display: flex;
+  width: 90%;
+  height: 60px;
+  background-color: white;
+  filter: drop-shadow(3px 5px 4px grey);
+  border-radius: 15px;
+  margin-bottom: 5%;
+  font-family: Roboto;
+}
+
+.input-text {
+  border: none;
+  width: 80%;
+  font-size: 20px;
+  float: left;
+  margin-left: 25px;
+  background-color: none;
+  font-family: Roboto;
+}
