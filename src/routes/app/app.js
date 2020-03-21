@@ -36,7 +36,7 @@ export default function App() {
           <Route path="/review">
             <Review />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import "./login.css";
 import LoginLogo from "../../images/login.svg";
 import Title from "../../components/title/title";
@@ -6,23 +7,29 @@ import { Link } from "react-router-dom";
 import Inputbar from "../../components/inputbar/inputbar";
 import Submitbutton from "../../components/submitbutton/submitbutton";
 
+import axios from "axios";
+import AuthService from "../../services/authService";
+
+const auth = new AuthService("http://localhost:5000");
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
 
   handleSubmit = event => {
-    alert(
-      "Submitted Username: " +
-        this.state.username +
-        " Submitted password: " +
-        this.state.password
-    );
+    // alert(
+    //   "Submitted Username: " +
+    //     this.state.username +
+    //     " Submitted password: " +
+    //     this.state.password
+    // );
     event.preventDefault();
+    this.loginUser();
   };
 
   handleUsernameChange = event => {
@@ -32,6 +39,33 @@ class Login extends Component {
   handlePasswordChange = event => {
     this.setState({ password: event.target.value });
   };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  loginUser() {
+    // axios
+    //   .post("http://localhost:5000/api/v1/auth/login", {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     this.props.history.push("course");
+    //   })
+    //   .catch(err => alert(err.response.data.error));
+
+    auth
+      .login(this.state.email, this.state.password)
+      .then(res => {
+        console.log(res);
+        this.props.history.push("course");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -50,12 +84,15 @@ class Login extends Component {
 
             <form>
               <Inputbar
-                text="Username"
-                changeInput={this.handleUsernameChange}
+                text="Email"
+                name="email"
+                changeInput={this.handleChange}
               />
               <Inputbar
                 text="Password"
-                changeInput={this.handlePasswordChange}
+                type="password"
+                name="password"
+                changeInput={this.handleChange}
               />
               <Submitbutton text="Login" clickedSubmit={this.handleSubmit} />
             </form>
@@ -66,4 +103,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

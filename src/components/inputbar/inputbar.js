@@ -6,9 +6,10 @@ class Inputbar extends React.Component {
     return (
       <div className="input-bar" style={this.props.inputbarStyle}>
         <input
-          type="text"
+          type={this.props.type || "text"}
           className="input-text"
           // value={this.state.value}
+          name={this.props.name}
           onChange={this.props.changeInput}
           placeholder={this.props.text}
         />
