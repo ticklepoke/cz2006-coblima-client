@@ -9,8 +9,6 @@
   left: 0;
 }
 
-
-
 .buttons {
   display: flex;
   flex-direction: row-reverse;
@@ -35,4 +33,8 @@
 
 .register-button {
   display: flex;
+}
+
+.no-underline {
+  text-decoration: none !important;
 }
