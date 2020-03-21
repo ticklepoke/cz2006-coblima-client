@@ -9,7 +9,7 @@ import Submitbutton from "../../components/submitbutton/submitbutton";
 
 import AuthService from "../../services/authService";
 
-const auth = new AuthService("http://localhost:5000");
+const auth = new AuthService("http://35.240.245.213");
 
 class Register extends Component {
   constructor(props) {
