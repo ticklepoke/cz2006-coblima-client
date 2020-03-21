@@ -55,13 +55,7 @@ class Course extends Component {
             <div className="course-header-bot">
               <div className="course-header-code">CZ2006</div>
               <Link to="/review">
-                <Button
-                  variant="primary"
-                  className="course-header-button"
-                  // size="lg"
-                >
-                  ADD REVIEW
-                </Button>
+                <Button className="course-header-button">ADD REVIEW</Button>
               </Link>
             </div>
           </div>
