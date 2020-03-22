@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./course.css";
 //images
 import ActiveRating from "../../images/active-rating.svg";
@@ -32,6 +33,23 @@ class Course extends Component {
     console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
+
+  searchCourse(term) {
+    axios
+      .get("http://35.240.245.213/api/v1/courses", {
+        params: {
+          search: term
+        }
+      })
+      .then(res => {
+        console.log(res);
+        alert("Search Results: " + res.data.data[0].title.toLowerCase());
+      })
+      .catch(err => {
+        console.log(err.response.body.data);
+      });
+  }
+
   render() {
     return (
       <div className="course-container">
@@ -39,6 +57,7 @@ class Course extends Component {
           <Title />
           <Searchbar
             className="course-searchbar"
+            searchCourse={this.searchCourse}
             searchbarStyle={{
               position: "fixed",
               top: "30px",

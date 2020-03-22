@@ -31,9 +31,8 @@ export default function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
+          <ProtectedRoute path="/profile" component={Profile} />
+
           <Route path="/review">
             <Review />
           </Route>

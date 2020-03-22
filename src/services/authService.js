@@ -30,7 +30,7 @@ export default class AuthService {
         // })
       }).then(res => {
         console.log(res);
-        this.setProfile(res.data);
+        this.setProfile(res.data.data);
         return Promise.resolve(res.data);
       });
     });
