@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProtectedRoute from "../../components/protectedRoute/ProtectedRoute";
 
 import "../../assets/css/bootstrap.css";
 
@@ -18,9 +19,8 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/course">
-            <Course />
-          </Route>
+          <ProtectedRoute path="/course" component={Course} />
+
           <Route path="/query">
             <Query />
           </Route>
