@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Rating } from "@material-ui/lab/";
 import "./review.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import Rating from "@material-ui/lab/rating";
-import { withStyles } from '@material-ui/core/styles';
+
+import { withStyles } from "@material-ui/core/styles";
 // images
 import ReviewImage from "../../images/submit-review.svg";
 // components
@@ -13,11 +14,11 @@ import InputBar from "../../components/inputbar/inputbar";
 
 const StyledRating = withStyles({
   iconFilled: {
-    color: 'white',
+    color: "white"
   },
   iconHover: {
-    color: 'white',
-  },
+    color: "white"
+  }
 })(Rating);
 
 class Review extends Component {
@@ -26,7 +27,7 @@ class Review extends Component {
     this.state = {
       title: "",
       content: "",
-      rating:0,
+      rating: 0
     };
   }
 
@@ -43,8 +44,8 @@ class Review extends Component {
       "Submitted Title: " +
         this.state.title +
         " Submitted Content: " +
-        this.state.content + 
-        "with rating: " + 
+        this.state.content +
+        "with rating: " +
         this.state.rating
     );
     event.preventDefault();
@@ -92,7 +93,7 @@ class Review extends Component {
                   value={this.state.value}
                   size="large"
                   onChange={(event, newValue) => {
-                    this.setState({rating: newValue});
+                    this.setState({ rating: newValue });
                   }}
                 />
                 <Link to="/course" className="review-submit-link no-underline">
