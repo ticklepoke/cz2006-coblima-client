@@ -62,7 +62,7 @@
 .review-submit-button {
   display: flex;
   font-family: ReemKufi;
-  font-size: 40px;
+  font-size: 27px;
   background-color: #050303;
   border-radius: 15px;
 }
@@ -76,4 +76,12 @@
 .review-body-right-image {
   display: flex;
   height: 60%;
+}
+
+.rating-label {
+  color: white;
+  font-size: 30px;
+  margin-top: -8px;
+  font-family: Limelight;
+  margin-right: 25px;
 }
