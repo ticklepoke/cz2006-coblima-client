@@ -4,8 +4,11 @@ import "./profile.css";
 import ProfileLogo from "../../images/profile.svg";
 import AvatarLogo from "../../images/avatar.svg";
 import Title from "../../components/title/title";
-import AuthService from "../../services/authService";
+import AuthService, {
+  retrieveAuthenticationHeader
+} from "../../services/authService";
 import Inputbar from "../../components/inputbar/inputbar";
+import axios from "axios";
 
 const auth = new AuthService("http://35.240.245.213");
 
@@ -14,7 +17,10 @@ class Profile extends Component {
     super(props);
     this.state = {
       profile: { name: "", matriculationNumber: "", email: "" },
-      editPassword: false
+      editPassword: false,
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: ""
     };
   }
 
@@ -25,6 +31,62 @@ class Profile extends Component {
       this.setState({ profile });
     }
   }
+
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handlePasswordSubmit = e => {
+    e.preventDefault();
+    const { oldPassword, newPassword, confirmPassword } = this.state;
+    if (newPassword !== confirmPassword) {
+      alert("New password does not match");
+      return;
+    }
+    if (newPassword.length === 0 || oldPassword.length === 0) {
+      alert("Please enter all fields");
+      return;
+    }
+    axios
+      .put(
+        "http://localhost:5000/api/v1/auth/updatepassword",
+        {
+          currentPassword: oldPassword,
+          newPassword
+        },
+        retrieveAuthenticationHeader()
+      )
+      .then(res => {
+        alert("Password Updated!");
+        this.setState({
+          editPassword: false,
+          oldPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+        });
+        auth.setToken(res.data.token);
+      })
+      .catch(err => {
+        console.log(err.response);
+        alert(err.response.data.error);
+        this.setState({
+          editPassword: false,
+          oldPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+        });
+      });
+  };
+
+  togglePasswordEditMode = () => {
+    this.setState({
+      editPassword: !this.state.editPassword,
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: ""
+    });
+  };
 
   render() {
     const { profile } = this.state;
@@ -48,27 +110,51 @@ class Profile extends Component {
             <button
               className="action-button"
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                this.setState({ editPassword: true });
-              }}
+              onClick={this.togglePasswordEditMode}
             >
               {" "}
               Edit Password
             </button>
             {this.state.editPassword ? (
-              <form
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  paddingTop: "20"
+                  alignItems: "center"
                 }}
               >
-                <div style={{ width: "100%" }}>
-                  <Inputbar text="Old Password" />
-                  <Inputbar text="New Password" />
-                  <Inputbar text="Confirm New Password" />
+                <div>
+                  <form
+                    style={{ width: "100%", marginLeft: 10, marginTop: 20 }}
+                  >
+                    <Inputbar
+                      text="Old Password"
+                      type="password"
+                      name="oldPassword"
+                      changeInput={this.handleChange}
+                    />
+                    <Inputbar
+                      text="New Password"
+                      type="password"
+                      name="newPassword"
+                      changeInput={this.handleChange}
+                    />
+                    <Inputbar
+                      text="Confirm New Password"
+                      type="password"
+                      name="confirmPassword"
+                      changeInput={this.handleChange}
+                    />
+                  </form>
+                  <button
+                    className="action-button"
+                    style={{ cursor: "pointer" }}
+                    onClick={this.handlePasswordSubmit}
+                  >
+                    Submit
+                  </button>
                 </div>
-              </form>
+              </div>
             ) : null}
             <Link to="/history">
               <button className="action-button" style={{ cursor: "pointer" }}>
