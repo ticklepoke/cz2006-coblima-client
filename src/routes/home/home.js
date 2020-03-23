@@ -101,28 +101,58 @@ class Home extends Component {
         <Searchbar
           data-aos="fade-in"
           className="home-searchbar"
-          searchbarStyle={{
+          searchbarStyle={this.state.searchResults.length === 0 ? {
             "z-index": "1",
             position: "absolute",
-            top: "60%",
-            left: "30%"
+            top: "53%",
+            left: "30%",
+            transition: "all 1.9s",
+          } : {
+            "z-index": "1",
+            position: "absolute",
+            top: "53%",
+            left: "30%",
+            borderRadius: "25px 25px 0px 0px",
+            transition: "all 1.9s",
           }}
           searchTerm={term => this.getSearchSuggestion(term)}
         />
-        {this.state.searchResults.length === 0 ? null : (
-          <div
+        {this.state.searchResults.length === 0 ?           
+        <div
             style={{
               position: "absolute",
-              top: "70%",
+              top: "60%",
               left: "30%",
+              width: "55%",
               backgroundColor: "white",
               textAlign: "start",
               boxShadow: "2px 2px 3px #777",
-              paddingTop: 10,
+              paddingTop: "4%",
               paddingBottom: 10,
               paddingRight: 20,
               paddingLeft: 20,
-              borderRadius: 10
+              borderRadius: '0px 0px 10px 10px',
+              opacity: 0,
+              transition: "opacity 0.6s",
+            }}
+          >
+            {this.renderSuggestions()}
+          </div> : (
+          <div
+            style={{
+              position: "absolute",
+              top: "60%",
+              left: "30%",
+              width: "55%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "4%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: '0px 0px 10px 10px',
+              transition: "opacity 0.9s",
             }}
           >
             {this.renderSuggestions()}

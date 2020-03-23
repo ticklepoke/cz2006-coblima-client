@@ -25,8 +25,7 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <ProtectedRoute path="/course" component={Course} />
-
+          <Route path="/course" component={Course} />
           <Route path="/query">
             <Query />
           </Route>
