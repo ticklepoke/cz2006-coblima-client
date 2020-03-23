@@ -7,7 +7,7 @@ import Title from "../../components/title/title";
 import AuthService, {
   retrieveAuthenticationHeader
 } from "../../services/authService";
-import Inputbar from "../../components/inputbar/inputbar";
+import ThinInputbar from "../../components/thininputbar/thininputbar";
 import axios from "axios";
 
 const auth = new AuthService("http://35.240.245.213");
@@ -86,6 +86,7 @@ class Profile extends Component {
       newPassword: "",
       confirmPassword: ""
     });
+    
   };
 
   render() {
@@ -98,7 +99,7 @@ class Profile extends Component {
         </div>
 
         <div className="profile-right-column">
-          <div className="login-right-container">
+          <div className="profile-right-container">
             <h2 className="profile-header">Account Settings</h2>
             <img src={AvatarLogo} alt="Avatar-Logo" className="avatar-logo" />
             <p className="profile-subheader">
@@ -108,11 +109,10 @@ class Profile extends Component {
             <p className="profile-paragraph">{profile.matriculationNumber}</p>
             <p className="profile-paragraph">{profile.email}</p>
             <button
-              className="action-button"
+              className={this.state.editPassword ? "action-button active-action-button" : "action-button"}
               style={{ cursor: "pointer" }}
               onClick={this.togglePasswordEditMode}
             >
-              {" "}
               Edit Password
             </button>
             {this.state.editPassword ? (
@@ -125,21 +125,22 @@ class Profile extends Component {
               >
                 <div>
                   <form
-                    style={{ width: "100%", marginLeft: 10, marginTop: 20 }}
+                    style={{ width: "100%" }}
                   >
-                    <Inputbar
+                    <ThinInputbar
                       text="Old Password"
                       type="password"
                       name="oldPassword"
                       changeInput={this.handleChange}
+                      class="action-button"
                     />
-                    <Inputbar
+                    <ThinInputbar
                       text="New Password"
                       type="password"
                       name="newPassword"
                       changeInput={this.handleChange}
                     />
-                    <Inputbar
+                    <ThinInputbar
                       text="Confirm New Password"
                       type="password"
                       name="confirmPassword"
@@ -157,7 +158,7 @@ class Profile extends Component {
               </div>
             ) : null}
             <Link to="/history">
-              <button className="action-button" style={{ cursor: "pointer" }}>
+              <button className={this.state.editPassword ? "review-history-button hide-review-history-button action-button" : "review-history-button action-button"} style={{ cursor: "pointer" }}>
                 {" "}
                 View Review History
               </button>

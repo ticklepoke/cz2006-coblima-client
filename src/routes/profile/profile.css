@@ -17,7 +17,7 @@
   width: 45%;
   position: absolute;
   right: 0;
-  background-color: rgba(108, 99, 255, 0.6);
+  background-color: rgb(108,98,255);
   text-align: center;
 }
 
@@ -30,12 +30,10 @@
 
 .profile-right-container {
   width: 60%;
-  height: 70%;
+  height: 100%;
   position: absolute;
   top: 10%;
   left: 20%;
-  border: 1px solid green;
-  background-color: pink;
 }
 
 .profile-header {
@@ -81,4 +79,22 @@
   border: none;
   border-radius: 50px;
   filter: drop-shadow(1px 3px 5px black);
+  transition: all 0.9s;
+}
+
+.active-action-button {
+  background-color: rgb(57,55,77);
+  color: white;
+}
+
+.review-history-button {
+  opacity: 1;
+  transition: all 1s;
+}
+
+.hide-review-history-button {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }
