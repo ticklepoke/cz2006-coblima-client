@@ -2,6 +2,15 @@
   position: absolute;
   top: 40px;
   right: 110px;
+  padding-top: 10px;
+  transition: all 1.0s;
+}
+
+.toggle-status-container {
+  padding-top: 0px;
+  border-radius: 15px;
+  padding: 8px;
+  margin-top: -20px;
 }
 
 .status-name {
@@ -12,7 +21,7 @@
 }
 
 .status-arrow {
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 .status-button {
@@ -21,6 +30,8 @@
   width: 100%;
   text-align: left;
   border-radius: 3px;
+  padding: 0;
+  margin: 0;
 }
 
 .status-button:hover {
@@ -32,4 +43,20 @@
   color: #777777;
   margin: 0px;
   z-index: 100;
+}
+
+.dropdown-triangle {
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.5s;
+}
+
+.toggle-triangle {
+  transform: rotate(90deg);
+}
+
+.status-subtext {
+  color: #aaa;
+  padding-left: 10px;
 }
