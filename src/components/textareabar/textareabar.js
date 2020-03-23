@@ -1,23 +1,25 @@
 import React from "react";
-import "./inputbar.css";
+import "./textareabar.css";
 
-class Inputbar extends React.Component {
+class Textareabar extends React.Component {
   render() {
     return (
-      <div className="input-bar" style={this.props.inputbarStyle}>
-        <input
+      <div className="textarea-bar" style={this.props.inputbarStyle}>
+        <textarea
           type={this.props.type || "text"}
-          className="input-text"
-          // value={this.state.value}
+          className="textarea-text"
           name={this.props.name}
           onChange={this.props.changeInput}
           placeholder={this.props.text}
           disabled={this.props.disabled}
           value={this.props.value}
+          wrap="hard"
+          rows="10"
+          style={{ resize: "none" }}
         />
       </div>
     );
   }
 }
 
-export default Inputbar;
+export default Textareabar;
