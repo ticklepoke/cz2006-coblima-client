@@ -39,11 +39,15 @@ export class Historycard extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/history">
-              <button type="submit" className="delete-button dual-button">
-                Delete
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                this.props.deleteReview(this.props.id);
+              }}
+              type="submit"
+              className="delete-button dual-button"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

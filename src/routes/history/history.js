@@ -43,13 +43,14 @@ class Course extends Component {
   renderHistoryCards = () => {
     if (this.state.reviews.length === 0) return;
     const cards = this.state.reviews.map(review => {
-      console.log(review);
       return (
         <Historycard
           title={review.title}
           rating={review.rating}
           content={review.description}
           date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+          deleteReview={this.deleteReview}
+          id={review._id}
         />
       );
     });
@@ -59,6 +60,16 @@ class Course extends Component {
     let currentIsDiplayReview = this.state.isDisplayReview;
     console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
+  };
+
+  deleteReview = id => {
+    this.setState({
+      reviews: this.state.reviews.filter(review => review._id !== id)
+    });
+    axios
+      .delete("http://35.240.245.213/api/v1/reviews/" + id)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.response));
   };
   render() {
     const { name, matriculationNumber } = auth.getProfile();

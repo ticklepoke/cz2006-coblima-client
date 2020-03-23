@@ -32,7 +32,8 @@ class Course extends Component {
         academicUnits: 0,
         courseCode: ""
       },
-      reviews: []
+      reviews: [],
+      searchResults: []
     };
   }
 
@@ -50,7 +51,6 @@ class Course extends Component {
       )
       .then(res => {
         this.setState({ course: res.data.data });
-        console.log(res.data.data._id);
         axios
           .get(
             "http://35.240.245.213/api/v1/courses/" +
@@ -81,22 +81,76 @@ class Course extends Component {
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
 
-  // searchCourse(term) {
-  //   axios
-  //     .get("http://35.240.245.213/api/v1/courses", {
-  //       params: {
-  //         search: term
-  //       }
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //       alert("Search Results: " + res.data.data[0].title.toLowerCase());
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response.body.data);
-  //     });
-  // }
+  fetchData = course => {
+    axios
+      .get("http://35.240.245.213/api/v1/courses/" + course._id)
+      .then(res => {
+        this.setState({ course: res.data.data });
+        axios
+          .get(
+            "http://35.240.245.213/api/v1/courses/" +
+              res.data.data._id +
+              "/reviews"
+          )
+          .then(res => {
+            // setState reviewData
+            let reviewData = res.data.data;
+            this.setState({ reviews: reviewData });
 
+            // calculate averageReview
+            let sumReviews = 0;
+            reviewData.forEach(review => {
+              sumReviews += review["rating"];
+            });
+            let averageReview = sumReviews / reviewData.length;
+            this.setState({ averageReview: averageReview });
+          })
+          .catch(err => console.log(err.response));
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  searchTerm = term => {
+    axios
+      .get("http://35.240.245.213/api/v1/courses", {
+        params: {
+          search: term
+        }
+      })
+      .then(res => {
+        this.setState({ searchResults: res.data.data });
+        // console.log(res.data.data);
+        // alert("Search Results: " + res.data.data[0].title.toLowerCase());
+      })
+      .catch(err => {
+        console.log(err.response.body.data);
+      });
+  };
+
+  renderSuggestions = () => {
+    if (this.state.searchResults < 1) {
+      return null;
+    }
+    const results = this.state.searchResults.slice(0, 4).map(course => {
+      return (
+        <div
+          style={{
+            cursor: "pointer",
+            backgroundColor: "#fff",
+            width: "100%",
+            fontSize: 30
+          }}
+          onClick={() => {
+            this.setState({ searchResults: [] });
+            this.fetchData(course);
+          }}
+        >
+          <p>{course.courseCode + ": " + titleCase(course.title)}</p>
+        </div>
+      );
+    });
+    return results;
+  };
   render() {
     const { title, courseCode } = this.state.course;
     return (
@@ -112,7 +166,52 @@ class Course extends Component {
               padding: "10px 30px",
               width: "45%"
             }}
+            searchTerm={this.searchTerm}
           />
+          {this.state.searchResults.length === 0 ? (
+            <div
+              style={{
+                position: "absolute",
+                top: "65%",
+                left: "19%",
+                width: "47%",
+                backgroundColor: "white",
+                textAlign: "start",
+                boxShadow: "2px 2px 3px #777",
+                paddingTop: "4%",
+                paddingBottom: 10,
+                paddingRight: 20,
+                paddingLeft: 20,
+                borderRadius: "0px 0px 10px 10px",
+                opacity: 0,
+                transition: "opacity 0.6s",
+                zIndex: 99
+              }}
+            >
+              {this.renderSuggestions()}
+            </div>
+          ) : (
+            <div
+              style={{
+                position: "absolute",
+                top: "65%",
+                left: "19%",
+                width: "47%",
+                backgroundColor: "white",
+                textAlign: "start",
+                boxShadow: "2px 2px 3px #777",
+                paddingTop: "4%",
+                paddingBottom: 10,
+                paddingRight: 20,
+                paddingLeft: 20,
+                borderRadius: "0px 0px 10px 10px",
+                transition: "opacity 0.9s",
+                zIndex: 99
+              }}
+            >
+              {this.renderSuggestions()}
+            </div>
+          )}
           <Status />
         </div>
         <div className="course-header">
@@ -147,12 +246,13 @@ class Course extends Component {
 export default withRouter(Course);
 
 function RenderTiles(props) {
+  const averageReview = Math.round(props.averageReview * 10) / 10 || "-";
   if (props.isDisplayReview === false) {
     return (
       <div className="course-header-right">
         <Activetile
           image={ActiveRating}
-          number={props.averageReview + " / 5"}
+          number={averageReview + " / 5"}
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
