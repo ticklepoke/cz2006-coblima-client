@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./reviewcard.css";
 
+import Avatarblack from "../../images/avatarblack.svg";
 import ReviewStars from "../../components/reviewstars/reviewstars";
 
 export class Reviewcard extends Component {
@@ -10,18 +11,28 @@ export class Reviewcard extends Component {
     const content = this.props.content;
     const date = this.props.date;
     return (
-      <div className="review-card">
-        <div className="review-card-top">
-          <div className="review-card-top-title">{title}</div>
-          <div className="review-card-top-stars">
-            <ReviewStars rating={rating} />
+      <div className="review-total">
+        <div className="review-avatar">
+          <img
+            alt="Profile"
+            className="review-avatar-image"
+            src={Avatarblack}
+          />
+          <div className="review-avatar-name">John Tan</div>
+        </div>
+        <div className="review-card">
+          <div className="review-card-top">
+            <div className="review-card-top-title">{title}</div>
+            <div className="review-card-top-stars">
+              <ReviewStars rating={rating} />
+            </div>
           </div>
-        </div>
-        <div className="review-card-mid">
-          <div className="review-card-mid-content">{content}</div>
-        </div>
-        <div className="review-card-bot">
-          <div className="review-card-bot-date">{date}</div>
+          <div className="review-card-mid">
+            <div className="review-card-mid-content">{content}</div>
+          </div>
+          <div className="review-card-bot">
+            <div className="review-card-bot-date">{date}</div>
+          </div>
         </div>
       </div>
     );

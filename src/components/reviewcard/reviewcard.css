@@ -1,7 +1,41 @@
+.review-total {
+  display: flex;
+  width: 1500px;
+  height: 290px;
+}
+
+.review-avatar {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  align-items: center;
+  padding: 20px;
+  justify-content: center;
+}
+
+.review-avatar-image {
+  display: flex;
+}
+
+.review-avatar-name {
+  display: flex;
+  margin-top: 10px;
+  font-family: ReemKufi;
+  font-weight: 300;
+  font-size: 30px;
+}
+
+/* .review-avatar-course {
+  display: flex;
+  font-family:  ReemKufi;
+  font-weight: 300;
+  font-size: 24px;
+} */
+
 .review-card {
   display: flex;
   flex-direction: column;
-  width: 1069px;
+  width: 1200px;
   height: 270px;
   background-color: #fafafa;
   margin: 10px 20px;

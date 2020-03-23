@@ -85,8 +85,8 @@ class Editreview extends Component {
         retrieveAuthenticationHeader()
       )
       .then(res => {
-        alert("Review Added!");
-        this.props.history.push("/course");
+        alert("Review Edited!");
+        this.props.history.push("/history");
       })
       .catch(err => {
         console.log(err.response);
