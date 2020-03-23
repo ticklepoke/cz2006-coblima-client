@@ -12,7 +12,7 @@ import InactiveRating from "../../images/inactive-rating.svg";
 import InactiveReview from "../../images/inactive-review.svg";
 import InactiveCredits from "../../images/inactive-credits.svg";
 import course from "../../images/course.svg";
-
+import moment from "moment";
 //components
 import Title from "../../components/title/title";
 import Searchbar from "../../components/searchbar/searchbar";
@@ -36,7 +36,13 @@ class Course extends Component {
     };
   }
 
+  componentWillMount() {
+    if (this.props.location.state === undefined) {
+      this.props.history.push("/");
+    }
+  }
   componentDidMount() {
+    if (this.props.location.state === undefined) return;
     axios
       .get(
         "http://35.240.245.213/api/v1/courses/" +
@@ -53,16 +59,16 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
-            let reviewData = res.data.data
+            let reviewData = res.data.data;
             this.setState({ reviews: reviewData });
-            
+
             // calculate averageReview
-            let sumReviews = 0
+            let sumReviews = 0;
             reviewData.forEach(review => {
               sumReviews += review["rating"];
             });
             let averageReview = sumReviews / reviewData.length;
-            this.setState({ averageReview: averageReview});
+            this.setState({ averageReview: averageReview });
           })
           .catch(err => console.log(err.response));
       })
@@ -146,7 +152,7 @@ function RenderTiles(props) {
       <div className="course-header-right">
         <Activetile
           image={ActiveRating}
-          number={ props.averageReview + " / 5"}
+          number={props.averageReview + " / 5"}
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
@@ -169,7 +175,7 @@ function RenderTiles(props) {
         <div onClick={props.toggleShowReview}>
           <Inactivetile
             image={InactiveRating}
-            number={ props.averageReview + " / 5"}
+            number={props.averageReview + " / 5"}
             caption={"Overall Rating"}
           />
         </div>
@@ -215,7 +221,7 @@ function RenderContent(props) {
               title={review.title}
               rating={review.rating}
               content={review.description}
-              date={review.createdAt}
+              date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
             />
           ))}
         </div>

@@ -11,20 +11,57 @@ import Activetile from "../../components/activetile/activetile";
 import Status from "../../components/status/status";
 import Historycard from "../../components/historycard/historycard";
 
+import authService from "../../services/authService";
+import axios from "axios";
+import moment from "moment";
+
+const auth = new authService("http://35.240.245.213");
+
 class Course extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDisplayReview: true
+      isDisplayReview: true,
+      reviews: []
     };
   }
 
+  componentDidMount() {
+    const userID = auth.getProfile()._id;
+    if (!userID) return;
+
+    axios
+      .get("http://35.240.245.213/api/v1/auth/" + userID + "/reviews")
+      .then(res => {
+        this.setState({ reviews: res.data.data });
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
+
+  renderHistoryCards = () => {
+    if (this.state.reviews.length === 0) return;
+    const cards = this.state.reviews.map(review => {
+      console.log(review);
+      return (
+        <Historycard
+          title={review.title}
+          rating={review.rating}
+          content={review.description}
+          date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+        />
+      );
+    });
+    return cards;
+  };
   toggleShowReview = event => {
     let currentIsDiplayReview = this.state.isDisplayReview;
     console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
   render() {
+    const { name, matriculationNumber } = auth.getProfile();
     return (
       <div className="course-container">
         <div className="course-navbar">
@@ -43,30 +80,21 @@ class Course extends Component {
         </div>
         <div className="course-header">
           <div className="course-header-left">
-            <div className="course-header-title">Jeremy Tan Chong Tat</div>
+            <div className="course-header-title">{name}</div>
             <div className="course-header-bot">
-              <div className="course-header-code">U1830020A</div>
+              <div className="course-header-code">{matriculationNumber}</div>
             </div>
           </div>
           <div className="course-header-right">
-            <Activetile image={ActiveReview} number={"2"} caption={"Reviews"} />
+            <Activetile
+              image={ActiveReview}
+              number={this.state.reviews.length}
+              caption={"Reviews"}
+            />
           </div>
         </div>
         <div className="course-body">
-          <div className="course-body-review">
-            <Historycard
-              title={"Highly Recommend this Course"}
-              rating={4}
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu"
-              date={"8th February 2020"}
-            />
-            <Historycard
-              title={"Trash Course"}
-              rating={2}
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu"
-              date={"6th February 2020"}
-            />
-          </div>
+          <div className="course-body-review">{this.renderHistoryCards()}</div>
         </div>
       </div>
     );

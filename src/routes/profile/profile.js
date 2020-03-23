@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./profile.css";
 import ProfileLogo from "../../images/profile.svg";
 import AvatarLogo from "../../images/avatar.svg";
@@ -86,7 +87,6 @@ class Profile extends Component {
       newPassword: "",
       confirmPassword: ""
     });
-    
   };
 
   render() {
@@ -109,7 +109,11 @@ class Profile extends Component {
             <p className="profile-paragraph">{profile.matriculationNumber}</p>
             <p className="profile-paragraph">{profile.email}</p>
             <button
-              className={this.state.editPassword ? "action-button active-action-button" : "action-button"}
+              className={
+                this.state.editPassword
+                  ? "action-button active-action-button"
+                  : "action-button"
+              }
               style={{ cursor: "pointer" }}
               onClick={this.togglePasswordEditMode}
             >
@@ -124,9 +128,7 @@ class Profile extends Component {
                 }}
               >
                 <div>
-                  <form
-                    style={{ width: "100%" }}
-                  >
+                  <form style={{ width: "100%" }}>
                     <ThinInputbar
                       text="Old Password"
                       type="password"
@@ -157,12 +159,23 @@ class Profile extends Component {
                 </div>
               </div>
             ) : null}
-            <Link to="/history">
-              <button className={this.state.editPassword ? "review-history-button hide-review-history-button action-button" : "review-history-button action-button"} style={{ cursor: "pointer" }}>
-                {" "}
-                View Review History
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                this.props.history.push({
+                  pathname: "/history",
+                  state: { user: "haha" }
+                });
+              }}
+              className={
+                this.state.editPassword
+                  ? "review-history-button hide-review-history-button action-button"
+                  : "review-history-button action-button"
+              }
+              style={{ cursor: "pointer" }}
+            >
+              {" "}
+              View Review History
+            </button>
           </div>
         </div>
       </div>
@@ -170,4 +183,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);
