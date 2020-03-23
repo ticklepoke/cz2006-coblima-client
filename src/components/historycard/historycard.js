@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./historycard.css";
 
 import RatingStars from "../reviewstars/reviewstars";
@@ -24,10 +24,27 @@ export class Historycard extends Component {
         <div className="history-card-bot">
           <div className="history-card-bot-date">{date}</div>
           <div className="dual-link-buttons">
-            <Link to='/review'><button type="submit" className="edit-button dual-button" >Edit</button></Link>
-            <Link to='/history'><button type="submit" className="delete-button dual-button" >Delete</button></Link>
+            <Link
+              to={{
+                pathname: "/editreview",
+                state: {
+                  title: title,
+                  rating: rating,
+                  content: content,
+                  date: date
+                }
+              }}
+            >
+              <button type="submit" className="edit-button dual-button">
+                Edit
+              </button>
+            </Link>
+            <Link to="/history">
+              <button type="submit" className="delete-button dual-button">
+                Delete
+              </button>
+            </Link>
           </div>
-          
         </div>
       </div>
     );

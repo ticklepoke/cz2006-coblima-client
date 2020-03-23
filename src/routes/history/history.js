@@ -49,11 +49,7 @@ class Course extends Component {
             </div>
           </div>
           <div className="course-header-right">
-            <Activetile
-              image={ActiveReview}
-              number={"2"}
-              caption={"Reviews"}
-            />
+            <Activetile image={ActiveReview} number={"2"} caption={"Reviews"} />
           </div>
         </div>
         <div className="course-body">

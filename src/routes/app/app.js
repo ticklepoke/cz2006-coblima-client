@@ -12,6 +12,7 @@ import Register from "../register/register";
 import Profile from "../profile/profile";
 import Review from "../review/review";
 import History from "../history/history";
+import Editreview from "../editreview/editreview";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -36,12 +37,14 @@ export default function App() {
             <Register />
           </Route>
           <ProtectedRoute path="/profile" component={Profile} />
-
           <Route path="/review">
             <Review />
           </Route>
           <Route path="/history">
             <History />
+          </Route>
+          <Route path="/editreview">
+            <Editreview />
           </Route>
           <Route exact path="/">
             <Home />

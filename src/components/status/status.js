@@ -30,14 +30,10 @@ class Status extends Component {
   };
   render() {
     return (
-      <div className="status-container">
-        <h2 className="status-name">{this.state.name}</h2>
+      <div className={this.state.toggleDropdown ? "status-container toggle-status-container" : "status-container"}>
+        <h4 className="status-name">{this.state.name}</h4>
         <button
-          style={{
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: "#fff"
-          }}
+          className={!this.state.toggleDropdown ? "dropdown-triangle" : "dropdown-triangle toggle-triangle"}
           onClick={this.toggleDropdown}
         >
           <img src={Triangle} alt="status-arrow" className="status-arrow" />
@@ -46,23 +42,21 @@ class Status extends Component {
         {this.state.toggleDropdown ? (
           <div
             style={{
-              border: "1px solid grey",
               marginTop: "10px",
-              marginBottom: "10px",
+              marginBottom: "0px",
               borderRadius: "5px",
-              boxShadow: "1px 1px 3px #777"
             }}
           >
-            <div style={{ borderBottom: "1px solid grey" }}>
+            <div>
               <button
                 className="status-button"
                 onClick={() => this.props.history.push("/profile")}
               >
-                <h6 style={{ color: "#777777", margin: "0px" }}>Profile</h6>
+                <h5 className="status-subtext">Profile</h5>
               </button>
             </div>
             <button className="status-button" onClick={this.logoutUser}>
-              <h6 style={{ color: "#777777", margin: "0px" }}>Logout</h6>
+              <h5 className="status-subtext" >Logout</h5>
             </button>
           </div>
         ) : null}
