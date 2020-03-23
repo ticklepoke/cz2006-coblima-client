@@ -52,8 +52,17 @@ class Course extends Component {
               "/reviews"
           )
           .then(res => {
-            this.setState({ reviews: res.data.data });
-            console.log(res.data.data);
+            // setState reviewData
+            let reviewData = res.data.data
+            this.setState({ reviews: reviewData });
+            
+            // calculate averageReview
+            let sumReviews = 0
+            reviewData.forEach(review => {
+              sumReviews += review["rating"];
+            });
+            let averageReview = sumReviews / reviewData.length;
+            this.setState({ averageReview: averageReview});
           })
           .catch(err => console.log(err.response));
       })
@@ -116,6 +125,7 @@ class Course extends Component {
             toggleShowReview={this.toggleShowReview}
             course={this.state.course}
             reviews={this.state.reviews}
+            averageReview={this.state.averageReview}
           />
         </div>
         <RenderContent
@@ -136,7 +146,7 @@ function RenderTiles(props) {
       <div className="course-header-right">
         <Activetile
           image={ActiveRating}
-          number={"4.6 / 5"}
+          number={ props.averageReview + " / 5"}
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
@@ -159,7 +169,7 @@ function RenderTiles(props) {
         <div onClick={props.toggleShowReview}>
           <Inactivetile
             image={InactiveRating}
-            number={"4.6 / 5"}
+            number={ props.averageReview + " / 5"}
             caption={"Overall Rating"}
           />
         </div>
