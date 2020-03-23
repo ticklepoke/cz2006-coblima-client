@@ -22,14 +22,12 @@
   z-index: 2;
   display: flex;
   flex-direction: row;
+  align-content: space-between;
   position: fixed;
-  /* top: 150px; */
-  /* padding-top: 20px; */
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  /* height: 170px; */
+  top: 140px;
+  height: 150px;
   width: 100%;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
 
@@ -73,14 +71,15 @@
 
 .course-header-right {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 80px;
   width: 50%;
 }
 
 .course-body {
   display: flex;
   position: relative;
-  top: 310px;
+  top: 290px;
   height: 100%;
   padding: 50px 0px;
 }

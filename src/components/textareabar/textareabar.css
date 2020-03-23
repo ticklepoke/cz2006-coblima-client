@@ -20,7 +20,7 @@ button:focus {
   outline: none;
 }
 
-.input-bar {
+.textarea-bar {
   display: flex;
   width: 90%;
   height: 60px;
@@ -31,7 +31,7 @@ button:focus {
   font-family: Roboto;
 }
 
-.input-text {
+.textarea-text {
   border: none;
   width: 100%;
   height: auto;

@@ -9,3 +9,9 @@
   border-radius: 50px;
   filter: drop-shadow(3px 6px 3px grey);
 }
+
+.submit-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition-duration: 0.5s;
+}

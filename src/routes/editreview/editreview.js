@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router";
 import _ from "lodash";
 import { Rating } from "@material-ui/lab/";
-import "./review.css";
+import "./editreview.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -27,7 +27,7 @@ const StyledRating = withStyles({
   }
 })(Rating);
 
-class Review extends Component {
+class Editreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,27 +39,19 @@ class Review extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (
-  //     this.props.location.state.Title &&
-  //     this.props.location.state.Content &&
-  //     this.props.location.state.Rating
-  //   ) {
-  //     this.setState({
-  //       title: this.props.location.state.Title,
-  //       content: this.props.location.state.Content,
-  //       rating: this.props.location.state.Rating
-  //     });
-  //   }
-  // }
-
-  // handleTitleChange = event => {
-  //   this.setState({ title: event.target.value });
-  // };
-
-  // handleContentChange = event => {
-  //   this.setState({ content: event.target.value });
-  // };
+  componentDidMount() {
+    if (
+      this.props.location.state.title &&
+      this.props.location.state.content &&
+      this.props.location.state.rating
+    ) {
+      this.setState({
+        title: this.props.location.state.title,
+        content: this.props.location.state.content,
+        rating: this.props.location.state.rating
+      });
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -93,8 +85,8 @@ class Review extends Component {
         retrieveAuthenticationHeader()
       )
       .then(res => {
-        alert("Review Added!");
-        this.props.history.push("/course");
+        alert("Review Edited!");
+        this.props.history.push("/history");
       })
       .catch(err => {
         console.log(err.response);
@@ -151,7 +143,7 @@ class Review extends Component {
         </div>
         <div className="review-body">
           <div className="review-body-left">
-            <div className="review-body-title">Submit Review</div>
+            <div className="review-body-title">Edit Review</div>
             <div className="review-body-form">
               {!_.isEmpty(this.state.selectedCourse) ? (
                 <div style={{ color: "#fff", marginTop: 20, display: "flex" }}>
@@ -211,6 +203,7 @@ class Review extends Component {
                 }}
                 name="title"
                 changeInput={this.handleChange}
+                value={this.state.title}
               />
               <Textareabar
                 text="Enter Review Here..."
@@ -222,12 +215,13 @@ class Review extends Component {
                 }}
                 name="content"
                 changeInput={this.handleChange}
+                value={this.state.content}
               />
               <div className="review-body-form-bot">
                 <span className="rating-label">Rating</span>
                 <StyledRating
                   name="simple-controlled"
-                  value={this.state.value}
+                  value={this.state.rating}
                   size="large"
                   onChange={(event, newValue) => {
                     this.setState({ rating: newValue });
@@ -254,7 +248,7 @@ class Review extends Component {
   }
 }
 
-export default withRouter(Review);
+export default withRouter(Editreview);
 
 function titleCase(str) {
   return str.replace(/\w\S*/g, function(txt) {

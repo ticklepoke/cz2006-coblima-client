@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import axios from "axios";
 import "./course.css";
 //images
 import ActiveRating from "../../images/active-rating.svg";
@@ -10,7 +12,7 @@ import InactiveRating from "../../images/inactive-rating.svg";
 import InactiveReview from "../../images/inactive-review.svg";
 import InactiveCredits from "../../images/inactive-credits.svg";
 import course from "../../images/course.svg";
-
+import moment from "moment";
 //components
 import Title from "../../components/title/title";
 import Searchbar from "../../components/searchbar/searchbar";
@@ -23,8 +25,54 @@ class Course extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDisplayReview: false
+      isDisplayReview: false,
+      course: {
+        title: "",
+        description: "",
+        academicUnits: 0,
+        courseCode: ""
+      },
+      reviews: []
     };
+  }
+
+  componentWillMount() {
+    if (this.props.location.state === undefined) {
+      this.props.history.push("/");
+    }
+  }
+  componentDidMount() {
+    if (this.props.location.state === undefined) return;
+    axios
+      .get(
+        "http://35.240.245.213/api/v1/courses/" +
+          this.props.location.state.course._id
+      )
+      .then(res => {
+        this.setState({ course: res.data.data });
+        console.log(res.data.data._id);
+        axios
+          .get(
+            "http://35.240.245.213/api/v1/courses/" +
+              res.data.data._id +
+              "/reviews"
+          )
+          .then(res => {
+            // setState reviewData
+            let reviewData = res.data.data;
+            this.setState({ reviews: reviewData });
+
+            // calculate averageReview
+            let sumReviews = 0;
+            reviewData.forEach(review => {
+              sumReviews += review["rating"];
+            });
+            let averageReview = sumReviews / reviewData.length;
+            this.setState({ averageReview: averageReview });
+          })
+          .catch(err => console.log(err.response));
+      })
+      .catch(err => console.log(err.response));
   }
 
   toggleShowReview = event => {
@@ -32,7 +80,25 @@ class Course extends Component {
     console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
+
+  // searchCourse(term) {
+  //   axios
+  //     .get("http://35.240.245.213/api/v1/courses", {
+  //       params: {
+  //         search: term
+  //       }
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //       alert("Search Results: " + res.data.data[0].title.toLowerCase());
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response.body.data);
+  //     });
+  // }
+
   render() {
+    const { title, courseCode } = this.state.course;
     return (
       <div className="course-container">
         <div className="course-navbar">
@@ -51,10 +117,10 @@ class Course extends Component {
         </div>
         <div className="course-header">
           <div className="course-header-left">
-            <div className="course-header-title">Software Engineering</div>
+            <div className="course-header-title">{titleCase(title)}</div>
             <div className="course-header-bot">
-              <div className="course-header-code">CZ2006</div>
-              <Link to="/review">
+              <div className="course-header-code">{courseCode}</div>
+              <Link to="/review" className="no-underline">
                 <Button className="course-header-button">ADD REVIEW</Button>
               </Link>
             </div>
@@ -63,15 +129,22 @@ class Course extends Component {
           <RenderTiles
             isDisplayReview={this.state.isDisplayReview}
             toggleShowReview={this.toggleShowReview}
+            course={this.state.course}
+            reviews={this.state.reviews}
+            averageReview={this.state.averageReview}
           />
         </div>
-        <RenderContent isDisplayReview={this.state.isDisplayReview} />
+        <RenderContent
+          isDisplayReview={this.state.isDisplayReview}
+          course={this.state.course}
+          reviews={this.state.reviews}
+        />
       </div>
     );
   }
 }
 
-export default Course;
+export default withRouter(Course);
 
 function RenderTiles(props) {
   if (props.isDisplayReview === false) {
@@ -79,19 +152,19 @@ function RenderTiles(props) {
       <div className="course-header-right">
         <Activetile
           image={ActiveRating}
-          number={"4.6 / 5"}
+          number={props.averageReview + " / 5"}
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
           <Inactivetile
             image={InactiveReview}
-            number={"23"}
+            number={props.reviews.length}
             caption={"Reviews"}
           />
         </div>
         <Inactivetile
           image={InactiveCredits}
-          number={"3"}
+          number={props.course.academicUnits}
           caption={"Module Credits"}
         />
       </div>
@@ -102,14 +175,18 @@ function RenderTiles(props) {
         <div onClick={props.toggleShowReview}>
           <Inactivetile
             image={InactiveRating}
-            number={"4.6 / 5"}
+            number={props.averageReview + " / 5"}
             caption={"Overall Rating"}
           />
         </div>
-        <Activetile image={ActiveReview} number={"23"} caption={"Reviews"} />
+        <Activetile
+          image={ActiveReview}
+          number={props.reviews.length}
+          caption={"Reviews"}
+        />
         <Inactivetile
           image={InactiveCredits}
-          number={"3"}
+          number={props.course.academicUnits}
           caption={"Module Credits"}
         />
       </div>
@@ -118,20 +195,13 @@ function RenderTiles(props) {
 }
 
 function RenderContent(props) {
+  console.log(props.reviews);
   if (props.isDisplayReview === false) {
     return (
       <div className="course-body">
         <div className="course-body-left">
           <div className="course-body-description">
-            The course consists of two parts – (i) statistical credit rating
-            models and (ii) credit derivatives. The first part would cover
-            various statistical credit rating models including Altman’s Z-score,
-            logistic regression, artificial neural network and intensity models.
-            The second part will cover various models used to price credit
-            derivative as well as tools used to manage credit risk. The topics
-            covered would include real and risk neutral probability of default,
-            RiskMetricsTM, CreditRisk+, default correlation, Copula, Basket
-            default swap, CDOs etc.
+            {props.course.description}
           </div>
           <div className="course-body-prereq">
             Course Prerequisites: FE5101 - Derivatives and Fixed Income
@@ -146,20 +216,22 @@ function RenderContent(props) {
     return (
       <div className="course-body">
         <div className="course-body-review">
-          <Reviewcard
-            title={"Highly Recommend this Course"}
-            rating={4}
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu"
-            date={"8th February 2020"}
-          />
-          <Reviewcard
-            title={"Trash Course"}
-            rating={2}
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu"
-            date={"6th February 2020"}
-          />
+          {props.reviews.map(review => (
+            <Reviewcard
+              title={review.title}
+              rating={review.rating}
+              content={review.description}
+              date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+            />
+          ))}
         </div>
       </div>
     );
   }
+}
+
+function titleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
