@@ -50,7 +50,7 @@ class Profile extends Component {
     }
     axios
       .put(
-        "http://localhost:5000/api/v1/auth/updatepassword",
+        "http://35.240.245.213/api/v1/auth/updatepassword",
         {
           currentPassword: oldPassword,
           newPassword

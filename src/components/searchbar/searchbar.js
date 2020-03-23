@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { withRouter } from "react-router";
 import "./searchbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -8,53 +9,14 @@ class Searchbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.searchCourse = this.searchCourse.bind(this);
   }
 
-  searchCourse(term) {
-    axios
-      .get("http://35.240.245.213/api/v1/courses", {
-        params: {
-          search: term
-        }
-      })
-      .then(res => {
-        console.log(res);
-        alert("Search Results: " + res.data.data[0].title.toLowerCase());
-      })
-      .catch(err => {
-        console.log(err.response.body.data);
-      });
-  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    // alert("A name was submitted: " + this.state.value);
-    event.preventDefault();
-    if (!this.state.value) {
-      return;
-    }
-    this.searchCourse(this.state.value);
-    // axios
-    //   .get("http://35.240.245.213/api/v1/courses", {
-    //     params: {
-    //       search: this.state.value
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     alert("Search Results: " + res.data.data[0].title.toLowerCase());
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response.body.data);
-    //   });
-  }
+    if (event.target.name === "value")
+      this.props.searchTerm(event.target.value);
+  };
 
   render() {
     return (
@@ -62,13 +24,14 @@ class Searchbar extends React.Component {
         <form onSubmit={this.handleSubmit} className="searchbar-form">
           <input
             type="text"
+            name="value"
             className="search-input-text"
-            value={this.state.value}
+            // value={this.state.value}
             onChange={this.handleChange}
             placeholder={"Enter course or module code"}
           />
           <button
-            type="submit"
+            // type="submit"
             className="submit-logo"
             style={{ cursor: "pointer" }}
           >
@@ -80,4 +43,4 @@ class Searchbar extends React.Component {
   }
 }
 
-export default Searchbar;
+export default withRouter(Searchbar);

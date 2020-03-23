@@ -26,7 +26,7 @@ class Status extends Component {
 
   logoutUser = () => {
     auth.logout();
-    this.props.history.push("/");
+    this.props.history.push("/course");
   };
   render() {
     return (
