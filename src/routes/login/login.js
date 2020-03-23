@@ -21,6 +21,13 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    const loggedIn = auth.loggedIn();
+    if (loggedIn) {
+      this.props.history.push("course");
+    }
+  }
+
   handleSubmit = event => {
     // alert(
     //   "Submitted Username: " +
