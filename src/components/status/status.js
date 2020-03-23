@@ -50,32 +50,19 @@ class Status extends Component {
               marginTop: "10px",
               marginBottom: "10px",
               borderRadius: "5px",
-              boxShadow: "1px 1px 3px #777",
-              zIndex: "100"
+              boxShadow: "1px 1px 3px #777"
             }}
           >
             <div style={{ borderBottom: "1px solid grey" }}>
               <button
-                style={{
-                  border: "none",
-                  cursor: "pointer",
-                  backgroundColor: "#fff"
-                }}
+                className="status-button"
                 onClick={() => this.props.history.push("/profile")}
               >
-                <h6 style={{ color: "#777777" }}>Profile</h6>
+                <h6 style={{ color: "#777777", margin: "0px" }}>Profile</h6>
               </button>
             </div>
-            <button
-              style={{
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: "#fff",
-                borderRadius: "10px"
-              }}
-              onClick={this.logoutUser}
-            >
-              <h6 style={{ color: "#777777" }}>Logout</h6>
+            <button className="status-button" onClick={this.logoutUser}>
+              <h6 style={{ color: "#777777", margin: "0px" }}>Logout</h6>
             </button>
           </div>
         ) : null}

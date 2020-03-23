@@ -34,21 +34,21 @@ class Course extends Component {
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
 
-  searchCourse(term) {
-    axios
-      .get("http://35.240.245.213/api/v1/courses", {
-        params: {
-          search: term
-        }
-      })
-      .then(res => {
-        console.log(res);
-        alert("Search Results: " + res.data.data[0].title.toLowerCase());
-      })
-      .catch(err => {
-        console.log(err.response.body.data);
-      });
-  }
+  // searchCourse(term) {
+  //   axios
+  //     .get("http://35.240.245.213/api/v1/courses", {
+  //       params: {
+  //         search: term
+  //       }
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //       alert("Search Results: " + res.data.data[0].title.toLowerCase());
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response.body.data);
+  //     });
+  // }
 
   render() {
     return (
@@ -57,7 +57,6 @@ class Course extends Component {
           <Title />
           <Searchbar
             className="course-searchbar"
-            searchCourse={this.searchCourse}
             searchbarStyle={{
               position: "fixed",
               top: "30px",

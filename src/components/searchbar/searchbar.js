@@ -11,6 +11,23 @@ class Searchbar extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.searchCourse = this.searchCourse.bind(this);
+  }
+
+  searchCourse(term) {
+    axios
+      .get("http://35.240.245.213/api/v1/courses", {
+        params: {
+          search: term
+        }
+      })
+      .then(res => {
+        console.log(res);
+        alert("Search Results: " + res.data.data[0].title.toLowerCase());
+      })
+      .catch(err => {
+        console.log(err.response.body.data);
+      });
   }
 
   handleChange(event) {
@@ -23,7 +40,7 @@ class Searchbar extends React.Component {
     if (!this.state.value) {
       return;
     }
-    this.props.searchCourse(this.state.value);
+    this.searchCourse(this.state.value);
     // axios
     //   .get("http://35.240.245.213/api/v1/courses", {
     //     params: {
