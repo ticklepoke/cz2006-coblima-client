@@ -35,8 +35,7 @@ class Editreview extends Component {
       selectedCourse: {},
       title: "",
       content: "",
-      rating: 0,
-      review: {}
+      rating: 0
     };
   }
 
@@ -48,20 +47,12 @@ class Editreview extends Component {
       this.props.location.state.rating
     ) {
       this.setState({
-        title: this.props.location.state.title,
+        title: this.props.location.state.title.slice(1, -1),
         content: this.props.location.state.content,
         rating: this.props.location.state.rating,
         selectedCourse: this.props.location.state.course
       });
     }
-
-    axios
-      .get(
-        "http://35.240.245.213/api/v1/reviews/" +
-          this.props.location.state.reviewID
-      )
-      .then(res => this.setState({ review: res.data.data }))
-      .catch(err => console.log(err));
   }
 
   handleChange = e => {
@@ -77,24 +68,24 @@ class Editreview extends Component {
     ) {
       return;
     }
-    // axios
-    //   .put(
-    //     `http://35.240.245.213/api/v1/reviews/` +
-    //       this.props.location.state.course,
-    //     {
-    //       title: this.state.title,
-    //       description: this.state.content,
-    //       rating: this.state.rating
-    //     },
-    //     retrieveAuthenticationHeader()
-    //   )
-    //   .then(res => {
-    //     alert("Review Edited!");
-    //     this.props.history.push("/history");
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response);
-    //   });
+    axios
+      .put(
+        "http://35.240.245.213/api/v1/reviews/" +
+          this.props.location.state.reviewID,
+        {
+          title: this.state.title,
+          description: this.state.content,
+          rating: this.state.rating
+        },
+        retrieveAuthenticationHeader()
+      )
+      .then(res => {
+        alert("Review Edited!");
+        this.props.history.push("/history");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   };
 
   handleCourseSearch = e => {
@@ -181,7 +172,6 @@ class Editreview extends Component {
                       margin: "10px 10px"
                     }}
                     changeInput={this.handleCourseSearch}
-                    // disabled={true}
                   />
 
                   <div
@@ -208,6 +198,7 @@ class Editreview extends Component {
                 name="title"
                 changeInput={this.handleChange}
                 maxLength="25"
+                value={this.state.title}
               />
               <Textareabar
                 text="Enter Review Here: (max 300 characters)"
@@ -221,6 +212,7 @@ class Editreview extends Component {
                 changeInput={this.handleChange}
                 maxLength="300"
                 textCount={this.state.content.length}
+                value={this.state.content}
               />
               <div className="review-body-form-bot">
                 <span className="rating-label">Rating</span>
