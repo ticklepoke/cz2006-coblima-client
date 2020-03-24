@@ -35,12 +35,14 @@ class Editreview extends Component {
       selectedCourse: {},
       title: "",
       content: "",
-      rating: 0
+      rating: 0,
+      review: {}
     };
   }
 
   componentDidMount() {
     if (
+      this.props.location.state.course &&
       this.props.location.state.title &&
       this.props.location.state.content &&
       this.props.location.state.rating
@@ -48,9 +50,18 @@ class Editreview extends Component {
       this.setState({
         title: this.props.location.state.title,
         content: this.props.location.state.content,
-        rating: this.props.location.state.rating
+        rating: this.props.location.state.rating,
+        selectedCourse: this.props.location.state.course
       });
     }
+
+    axios
+      .get(
+        "http://35.240.245.213/api/v1/reviews/" +
+          this.props.location.state.reviewID
+      )
+      .then(res => this.setState({ review: res.data.data }))
+      .catch(err => console.log(err));
   }
 
   handleChange = e => {
@@ -66,23 +77,24 @@ class Editreview extends Component {
     ) {
       return;
     }
-    axios
-      .post(
-        `http://35.240.245.213/api/v1/courses/${this.state.selectedCourse._id}/reviews`,
-        {
-          title: this.state.title,
-          description: this.state.content,
-          rating: this.state.rating
-        },
-        retrieveAuthenticationHeader()
-      )
-      .then(res => {
-        alert("Review Edited!");
-        this.props.history.push("/history");
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
+    // axios
+    //   .put(
+    //     `http://35.240.245.213/api/v1/reviews/` +
+    //       this.props.location.state.course,
+    //     {
+    //       title: this.state.title,
+    //       description: this.state.content,
+    //       rating: this.state.rating
+    //     },
+    //     retrieveAuthenticationHeader()
+    //   )
+    //   .then(res => {
+    //     alert("Review Edited!");
+    //     this.props.history.push("/history");
+    //   })
+    //   .catch(err => {
+    //     console.log(err.response);
+    //   });
   };
 
   handleCourseSearch = e => {
