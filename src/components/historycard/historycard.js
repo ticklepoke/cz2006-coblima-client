@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./historycard.css";
 
 import RatingStars from "../reviewstars/reviewstars";
+import axios from "axios";
 
 export class Historycard extends Component {
   render() {
@@ -10,6 +11,7 @@ export class Historycard extends Component {
     const rating = this.props.rating;
     const content = this.props.content;
     const date = this.props.date;
+    const course = this.props.course;
     return (
       <div className="history-card">
         <div className="history-card-top">

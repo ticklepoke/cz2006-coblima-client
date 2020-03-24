@@ -16,7 +16,7 @@ import moment from "moment";
 
 const auth = new authService("http://35.240.245.213");
 
-class Course extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +44,7 @@ class Course extends Component {
     const cards = this.state.reviews.map(review => {
       return (
         <Historycard
+          course={review.course}
           title={review.title}
           rating={review.rating}
           content={review.description}
@@ -111,4 +112,4 @@ class Course extends Component {
   }
 }
 
-export default Course;
+export default History;
