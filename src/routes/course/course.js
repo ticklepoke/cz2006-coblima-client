@@ -95,15 +95,20 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
+            let averageReview;
             let reviewData = res.data.data;
             this.setState({ reviews: reviewData });
 
-            // calculate averageReview
-            let sumReviews = 0;
-            reviewData.forEach(review => {
-              sumReviews += review["rating"];
-            });
-            let averageReview = sumReviews / reviewData.length;
+            if (reviewData.length === 0) {
+              averageReview = "-";
+            } else {
+              // calculate averageReview
+              let sumReviews = 0;
+              reviewData.forEach(review => {
+                sumReviews += review["rating"];
+              });
+              averageReview = sumReviews / reviewData.length;
+            }
             this.setState({ averageReview: averageReview });
           })
           .catch(err => console.log(err.response));
@@ -156,68 +161,85 @@ class Course extends Component {
     const { title, courseCode } = this.state.course;
     return (
       <div className="course-container">
-        <div className="course-navbar">
-          <Title />
-          <Searchbar
-            className="course-searchbar"
-            searchbarStyle={{
+        <Searchbar
+          className="course-searchbar"
+          searchbarStyle={
+            this.state.searchResults.length === 0
+              ? {
+                  position: "fixed",
+                  top: "30px",
+                  left: "350px",
+                  transition: "all 0.5s",
+                  zIndex: 99,
+                  width: "45%",
+                  padding: "10px 30px"
+                }
+              : {
+                  position: "fixed",
+                  top: "30px",
+                  left: "350px",
+                  borderRadius: "10px 10px 0px 0px",
+                  transition: "all 0.5s",
+                  zIndex: 99,
+                  width: "45%",
+                  padding: "10px 30px"
+                }
+          }
+          searchTerm={this.searchTerm}
+        />
+        {this.state.searchResults.length === 0 ? (
+          <div
+            style={{
               position: "fixed",
               top: "30px",
               left: "350px",
-              padding: "10px 30px",
-              width: "45%"
+              width: "45%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "2%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              opacity: 0,
+              transition: "opacity 0.6s",
+              zIndex: 98
             }}
-            searchTerm={this.searchTerm}
-          />
-          {this.state.searchResults.length === 0 ? (
-            <div
-              style={{
-                position: "absolute",
-                top: "65%",
-                left: "19%",
-                width: "47%",
-                backgroundColor: "white",
-                textAlign: "start",
-                boxShadow: "2px 2px 3px #777",
-                paddingTop: "4%",
-                paddingBottom: 10,
-                paddingRight: 20,
-                paddingLeft: 20,
-                borderRadius: "0px 0px 10px 10px",
-                opacity: 0,
-                transition: "opacity 0.6s",
-                zIndex: 99
-              }}
-            >
-              {this.renderSuggestions()}
-            </div>
-          ) : (
-            <div
-              style={{
-                position: "absolute",
-                top: "65%",
-                left: "19%",
-                width: "47%",
-                backgroundColor: "white",
-                textAlign: "start",
-                boxShadow: "2px 2px 3px #777",
-                paddingTop: "4%",
-                paddingBottom: 10,
-                paddingRight: 20,
-                paddingLeft: 20,
-                borderRadius: "0px 0px 10px 10px",
-                transition: "opacity 0.9s",
-                zIndex: 99
-              }}
-            >
-              {this.renderSuggestions()}
-            </div>
-          )}
+          >
+            {this.renderSuggestions()}
+          </div>
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: "80px",
+              left: "350px",
+              width: "45%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "2%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              transition: "opacity 0.9s",
+              zIndex: 97
+            }}
+          >
+            {this.renderSuggestions()}
+          </div>
+        )}
+
+        <div className="course-navbar">
+          <Title />
+
           <Status />
         </div>
         <div className="course-header">
           <div className="course-header-left">
-            <div className="course-header-title">{titleCase(title)}</div>
+            <div className="course-header-final-title">{titleCase(title)}</div>
             <div className="course-header-bot">
               <div className="course-header-code">{courseCode}</div>
               <Link

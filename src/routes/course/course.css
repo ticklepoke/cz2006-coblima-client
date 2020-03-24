@@ -40,10 +40,10 @@
   padding-left: 100px;
 }
 
-.course-header-title {
+.course-header-final-title {
   display: flex;
   font-family: Limelight;
-  font-size: 3em;
+  font-size: 2.3em;
   color: black;
 }
 
