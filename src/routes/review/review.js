@@ -40,6 +40,7 @@ class Review extends Component {
   }
 
   componentDidMount() {
+    if (this.props.location.state === undefined) return;
     if (this.props.location.state.selectedCourse) {
       this.setState({
         selectedCourse: this.props.location.state.selectedCourse
@@ -73,7 +74,10 @@ class Review extends Component {
       )
       .then(res => {
         alert("Review Added!");
-        this.props.history.push("/course");
+        this.props.history.push({
+          pathname: "/course",
+          state: { course: this.state.selectedCourse }
+        });
       })
       .catch(err => {
         console.log(err.response);

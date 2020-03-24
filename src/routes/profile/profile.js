@@ -172,7 +172,6 @@ class Profile extends Component {
               }
               style={{ cursor: "pointer" }}
             >
-              {" "}
               View Review History
             </button>
           </div>
