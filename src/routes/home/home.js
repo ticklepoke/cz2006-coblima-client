@@ -45,12 +45,7 @@ class Home extends Component {
     const results = this.state.searchResults.slice(0, 4).map(course => {
       return (
         <div
-          style={{
-            cursor: "pointer",
-            backgroundColor: "#fff",
-            width: "100%",
-            fontSize: 30
-          }}
+          className="home-results"
           onClick={() => {
             this.props.history.push({
               pathname: "/course",
@@ -101,43 +96,27 @@ class Home extends Component {
         <Searchbar
           data-aos="fade-in"
           className="home-searchbar"
-          searchbarStyle={this.state.searchResults.length === 0 ? {
-            "z-index": "1",
-            position: "absolute",
-            top: "53%",
-            left: "30%",
-            transition: "all 1.9s",
-          } : {
-            "z-index": "1",
-            position: "absolute",
-            top: "53%",
-            left: "30%",
-            borderRadius: "25px 25px 0px 0px",
-            transition: "all 1.9s",
-          }}
+          searchbarStyle={
+            this.state.searchResults.length === 0
+              ? {
+                  "z-index": "1",
+                  position: "absolute",
+                  top: "53%",
+                  left: "30%",
+                  transition: "all 0.5s"
+                }
+              : {
+                  "z-index": "1",
+                  position: "absolute",
+                  top: "53%",
+                  left: "30%",
+                  borderRadius: "10px 10px 0px 0px",
+                  transition: "all 0.5s"
+                }
+          }
           searchTerm={term => this.getSearchSuggestion(term)}
         />
-        {this.state.searchResults.length === 0 ?           
-        <div
-            style={{
-              position: "absolute",
-              top: "60%",
-              left: "30%",
-              width: "55%",
-              backgroundColor: "white",
-              textAlign: "start",
-              boxShadow: "2px 2px 3px #777",
-              paddingTop: "4%",
-              paddingBottom: 10,
-              paddingRight: 20,
-              paddingLeft: 20,
-              borderRadius: '0px 0px 10px 10px',
-              opacity: 0,
-              transition: "opacity 0.6s",
-            }}
-          >
-            {this.renderSuggestions()}
-          </div> : (
+        {this.state.searchResults.length === 0 ? (
           <div
             style={{
               position: "absolute",
@@ -151,8 +130,29 @@ class Home extends Component {
               paddingBottom: 10,
               paddingRight: 20,
               paddingLeft: 20,
-              borderRadius: '0px 0px 10px 10px',
-              transition: "opacity 0.9s",
+              borderRadius: "0px 0px 10px 10px",
+              opacity: 0,
+              transition: "opacity 0.6s"
+            }}
+          >
+            {this.renderSuggestions()}
+          </div>
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: "60%",
+              left: "30%",
+              width: "55%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "4%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              transition: "opacity 0.9s"
             }}
           >
             {this.renderSuggestions()}

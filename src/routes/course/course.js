@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import axios from "axios";
+import moment from "moment";
+//styles
 import "./course.css";
 //images
 import ActiveRating from "../../images/active-rating.svg";
@@ -12,7 +14,6 @@ import InactiveRating from "../../images/inactive-rating.svg";
 import InactiveReview from "../../images/inactive-review.svg";
 import InactiveCredits from "../../images/inactive-credits.svg";
 import course from "../../images/course.svg";
-import moment from "moment";
 //components
 import Title from "../../components/title/title";
 import Searchbar from "../../components/searchbar/searchbar";
@@ -219,7 +220,15 @@ class Course extends Component {
             <div className="course-header-title">{titleCase(title)}</div>
             <div className="course-header-bot">
               <div className="course-header-code">{courseCode}</div>
-              <Link to="/review" className="no-underline">
+              <Link
+                to={{
+                  pathname: "/review",
+                  state: {
+                    selectedCourse: this.state.course
+                  }
+                }}
+                className="no-underline"
+              >
                 <Button className="course-header-button">ADD REVIEW</Button>
               </Link>
             </div>

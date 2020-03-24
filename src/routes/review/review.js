@@ -39,27 +39,13 @@ class Review extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (
-  //     this.props.location.state.Title &&
-  //     this.props.location.state.Content &&
-  //     this.props.location.state.Rating
-  //   ) {
-  //     this.setState({
-  //       title: this.props.location.state.Title,
-  //       content: this.props.location.state.Content,
-  //       rating: this.props.location.state.Rating
-  //     });
-  //   }
-  // }
-
-  // handleTitleChange = event => {
-  //   this.setState({ title: event.target.value });
-  // };
-
-  // handleContentChange = event => {
-  //   this.setState({ content: event.target.value });
-  // };
+  componentDidMount() {
+    if (this.props.location.state.selectedCourse) {
+      this.setState({
+        selectedCourse: this.props.location.state.selectedCourse
+      });
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -74,14 +60,7 @@ class Review extends Component {
     ) {
       return;
     }
-    // alert(
-    //   "Submitted Title: " +
-    //     this.state.title +
-    //     " Submitted Content: " +
-    //     this.state.content +
-    //     "with rating: " +
-    //     this.state.rating
-    // );
+
     axios
       .post(
         `http://35.240.245.213/api/v1/courses/${this.state.selectedCourse._id}/reviews`,

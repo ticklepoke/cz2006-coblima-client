@@ -9,6 +9,18 @@
   left: 0;
 }
 
+.home-results {
+  cursor: pointer;
+  background-color: #fff;
+  width: 100%;
+  font-size: 30px;
+}
+
+.home-results:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
 .buttons {
   display: flex;
   flex-direction: row-reverse;
