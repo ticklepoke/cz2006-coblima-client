@@ -66,14 +66,6 @@ class Editreview extends Component {
     ) {
       return;
     }
-    // alert(
-    //   "Submitted Title: " +
-    //     this.state.title +
-    //     " Submitted Content: " +
-    //     this.state.content +
-    //     "with rating: " +
-    //     this.state.rating
-    // );
     axios
       .post(
         `http://35.240.245.213/api/v1/courses/${this.state.selectedCourse._id}/reviews`,
@@ -197,16 +189,16 @@ class Editreview extends Component {
                 </Fragment>
               )}
               <InputBar
-                text="Input Review Title:"
+                text="Input Review Title: (max 25 characters)"
                 inputbarStyle={{
                   margin: "10px 10px"
                 }}
                 name="title"
                 changeInput={this.handleChange}
-                value={this.state.title}
+                maxLength="25"
               />
               <Textareabar
-                text="Enter Review Here..."
+                text="Enter Review Here: (max 300 characters)"
                 inputbarStyle={{
                   height: "55%",
                   alignItems: "flex-start",
@@ -215,7 +207,8 @@ class Editreview extends Component {
                 }}
                 name="content"
                 changeInput={this.handleChange}
-                value={this.state.content}
+                maxLength="300"
+                textCount={this.state.content.length}
               />
               <div className="review-body-form-bot">
                 <span className="rating-label">Rating</span>

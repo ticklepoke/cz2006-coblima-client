@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./history.css";
 //images
 import ActiveReview from "../../images/active-review.svg";

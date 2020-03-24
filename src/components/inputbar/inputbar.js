@@ -14,6 +14,7 @@ class Inputbar extends React.Component {
           placeholder={this.props.text}
           disabled={this.props.disabled}
           value={this.props.value}
+          maxLength={this.props.maxLength}
         />
       </div>
     );

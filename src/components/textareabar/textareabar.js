@@ -13,10 +13,14 @@ class Textareabar extends React.Component {
           placeholder={this.props.text}
           disabled={this.props.disabled}
           value={this.props.value}
+          maxLength={this.props.maxLength}
           wrap="hard"
           rows="10"
           style={{ resize: "none" }}
         />
+        <span className="textarea-count">
+          Characters Left: {300 - this.props.textCount}
+        </span>
       </div>
     );
   }

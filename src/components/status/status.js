@@ -4,7 +4,6 @@ import "./status.css";
 
 import Triangle from "../../images/triangle.svg";
 import AuthService from "../../services/authService";
-import zIndex from "@material-ui/core/styles/zIndex";
 
 const auth = new AuthService("http://35.240.245.213");
 
@@ -30,10 +29,20 @@ class Status extends Component {
   };
   render() {
     return (
-      <div className={this.state.toggleDropdown ? "status-container toggle-status-container" : "status-container"}>
+      <div
+        className={
+          this.state.toggleDropdown
+            ? "status-container toggle-status-container"
+            : "status-container"
+        }
+      >
         <h4 className="status-name">{this.state.name}</h4>
         <button
-          className={!this.state.toggleDropdown ? "dropdown-triangle" : "dropdown-triangle toggle-triangle"}
+          className={
+            !this.state.toggleDropdown
+              ? "dropdown-triangle"
+              : "dropdown-triangle toggle-triangle"
+          }
           onClick={this.toggleDropdown}
         >
           <img src={Triangle} alt="status-arrow" className="status-arrow" />
@@ -44,7 +53,7 @@ class Status extends Component {
             style={{
               marginTop: "10px",
               marginBottom: "0px",
-              borderRadius: "5px",
+              borderRadius: "5px"
             }}
           >
             <div>
@@ -56,7 +65,7 @@ class Status extends Component {
               </button>
             </div>
             <button className="status-button" onClick={this.logoutUser}>
-              <h5 className="status-subtext" >Logout</h5>
+              <h5 className="status-subtext">Logout</h5>
             </button>
           </div>
         ) : null}
