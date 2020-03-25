@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import "./searchbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 class Searchbar extends React.Component {
   constructor(props) {

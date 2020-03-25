@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import axios from "axios";
 import moment from "moment";
-import { Pulse } from 'react-motions';
+import { Pulse } from "react-motions";
 //styles
 import "./course.css";
 //images
@@ -308,11 +308,11 @@ function RenderTiles(props) {
         />
         <div onClick={props.toggleShowReview}>
           <Pulse infinite>
-          <Inactivetile
-            image={InactiveReview}
-            number={props.reviews.length}
-            caption={"Reviews"}
-          />
+            <Inactivetile
+              image={InactiveReview}
+              number={props.reviews.length}
+              caption={"Reviews"}
+            />
           </Pulse>
         </div>
         <Inactivetile
@@ -356,7 +356,7 @@ function RenderContent(props) {
             {props.course.description}
           </div>
           <div className="course-body-prereq">
-            Course Prerequisites: FE5101 - Derivatives and Fixed Income
+            Course Prerequisites: {props.course.prerequisite}
           </div>
         </div>
         <div className="course-body-right">

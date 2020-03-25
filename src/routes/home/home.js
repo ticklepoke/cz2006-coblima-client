@@ -8,11 +8,7 @@ import "./home.css";
 import Searchbar from "../../components/searchbar/searchbar";
 
 import authService from "../../services/authService";
-import AOS from "aos";
-
 const auth = new authService("http://35.240.245.213");
-
-AOS.init();
 
 class Home extends Component {
   constructor(props) {
@@ -21,6 +17,7 @@ class Home extends Component {
       searchResults: []
     };
   }
+
   getSearchSuggestion = term => {
     axios
       .get("http://35.240.245.213/api/v1/courses", {
@@ -61,13 +58,9 @@ class Home extends Component {
     return (
       <div className="App">
         <img src={home} className="home-image" alt="home" />
-
-        {/* Header Tab */}
-
-        <Title color="white" data-aos="fade" />
+        <Title color="white" />
         <Status />
         <Searchbar
-          data-aos="fade-in"
           className="home-searchbar"
           searchbarStyle={
             this.state.searchResults.length === 0
