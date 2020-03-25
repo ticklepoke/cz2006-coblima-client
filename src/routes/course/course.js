@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import axios from "axios";
 import moment from "moment";
+import { Pulse } from 'react-motions';
 //styles
 import "./course.css";
 //images
@@ -306,11 +307,13 @@ function RenderTiles(props) {
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
+          <Pulse infinite>
           <Inactivetile
             image={InactiveReview}
             number={props.reviews.length}
             caption={"Reviews"}
           />
+          </Pulse>
         </div>
         <Inactivetile
           image={InactiveCredits}
