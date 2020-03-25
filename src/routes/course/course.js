@@ -60,17 +60,19 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
-            let userId
+            let userId;
             let reviewData = res.data.data;
 
             // retrieve user name from user id in each review
             reviewData.forEach(review => {
               userId = review.user;
-              axios.get("http://35.240.245.213/api/v1/users/" + userId)
+              axios
+                .get("http://35.240.245.213/api/v1/users/" + userId)
                 .then(res => {
                   review["username"] = res.data.data.name;
-                }).catch(err => console.log(err.response));
-            })
+                })
+                .catch(err => console.log(err.response));
+            });
 
             // set state for reviewData as reviews
             this.setState({ reviews: reviewData });
@@ -107,21 +109,23 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
-            let userId
+            let userId;
             let reviewData = res.data.data;
 
             // retrieve user name from user id in each review
             reviewData.forEach(review => {
               userId = review.user;
-              axios.get("http://35.240.245.213/api/v1/users/" + userId)
+              axios
+                .get("http://35.240.245.213/api/v1/users/" + userId)
                 .then(res => {
                   review["username"] = res.data.data.name;
-                }).catch(err => console.log(err.response));
-            })
-            console.log("Setting Review Data to", reviewData)
+                })
+                .catch(err => console.log(err.response));
+            });
+            console.log("Setting Review Data to", reviewData);
             // set state for reviewData as reviews
             this.setState({ reviews: reviewData });
-            console.log("this.state.reviews is", this.state.reviews)
+            console.log("this.state.reviews is", this.state.reviews);
 
             // calculate averageReview
             let sumReviews = 0;
@@ -131,7 +135,7 @@ class Course extends Component {
 
             let averageReview = sumReviews / reviewData.length;
             this.setState({ averageReview: averageReview });
-            this.setState({ isDisplayReview: false})
+            this.setState({ isDisplayReview: false });
           })
           .catch(err => console.log(err.response));
       })
@@ -160,12 +164,7 @@ class Course extends Component {
     const results = this.state.searchResults.slice(0, 4).map(course => {
       return (
         <div
-          style={{
-            cursor: "pointer",
-            backgroundColor: "#fff",
-            width: "100%",
-            fontSize: 30
-          }}
+          className="search-results"
           onClick={() => {
             this.setState({ searchResults: [] });
             this.fetchData(course);
@@ -372,7 +371,7 @@ function RenderContent(props) {
               rating={review.rating}
               content={review.description}
               date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
-              reviewUsername = {review.username}
+              reviewUsername={review.username}
             />
           ))}
         </div>

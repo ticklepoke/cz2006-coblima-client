@@ -45,7 +45,7 @@ class Home extends Component {
     const results = this.state.searchResults.slice(0, 4).map(course => {
       return (
         <div
-          className="home-results"
+          className="search-results"
           onClick={() => {
             this.props.history.push({
               pathname: "/course",

@@ -9,14 +9,14 @@
   left: 0;
 }
 
-.home-results {
+.search-results {
   cursor: pointer;
   background-color: #fff;
   width: 100%;
   font-size: 30px;
 }
 
-.home-results:hover {
+.search-results:hover {
   cursor: pointer;
   background-color: lightgrey;
 }

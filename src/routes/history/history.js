@@ -77,7 +77,7 @@ class History extends Component {
       <div className="course-container">
         <div className="course-navbar">
           <Title />
-          <Searchbar
+          {/* <Searchbar
             className="course-searchbar"
             searchbarStyle={{
               position: "fixed",
@@ -86,7 +86,7 @@ class History extends Component {
               padding: "10px 30px",
               width: "45%"
             }}
-          />
+          /> */}
           <Status />
         </div>
         <div className="course-header">
