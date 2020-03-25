@@ -60,7 +60,19 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
+            let userId
             let reviewData = res.data.data;
+
+            // retrieve user name from user id in each review
+            reviewData.forEach(review => {
+              userId = review.user;
+              axios.get("http://35.240.245.213/api/v1/users/" + userId)
+                .then(res => {
+                  review["username"] = res.data.data.name;
+                }).catch(err => console.log(err.response));
+            })
+
+            // set state for reviewData as reviews
             this.setState({ reviews: reviewData });
 
             // calculate averageReview
@@ -68,6 +80,7 @@ class Course extends Component {
             reviewData.forEach(review => {
               sumReviews += review["rating"];
             });
+
             let averageReview = sumReviews / reviewData.length;
             this.setState({ averageReview: averageReview });
           })
@@ -78,7 +91,6 @@ class Course extends Component {
 
   toggleShowReview = event => {
     let currentIsDiplayReview = this.state.isDisplayReview;
-    console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
 
@@ -95,21 +107,31 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
-            let averageReview;
+            let userId
             let reviewData = res.data.data;
-            this.setState({ reviews: reviewData });
 
-            if (reviewData.length === 0) {
-              averageReview = "-";
-            } else {
-              // calculate averageReview
-              let sumReviews = 0;
-              reviewData.forEach(review => {
-                sumReviews += review["rating"];
-              });
-              averageReview = sumReviews / reviewData.length;
-            }
+            // retrieve user name from user id in each review
+            reviewData.forEach(review => {
+              userId = review.user;
+              axios.get("http://35.240.245.213/api/v1/users/" + userId)
+                .then(res => {
+                  review["username"] = res.data.data.name;
+                }).catch(err => console.log(err.response));
+            })
+            console.log("Setting Review Data to", reviewData)
+            // set state for reviewData as reviews
+            this.setState({ reviews: reviewData });
+            console.log("this.state.reviews is", this.state.reviews)
+
+            // calculate averageReview
+            let sumReviews = 0;
+            reviewData.forEach(review => {
+              sumReviews += review["rating"];
+            });
+
+            let averageReview = sumReviews / reviewData.length;
             this.setState({ averageReview: averageReview });
+            this.setState({ isDisplayReview: false})
           })
           .catch(err => console.log(err.response));
       })
@@ -125,8 +147,6 @@ class Course extends Component {
       })
       .then(res => {
         this.setState({ searchResults: res.data.data });
-        // console.log(res.data.data);
-        // alert("Search Results: " + res.data.data[0].title.toLowerCase());
       })
       .catch(err => {
         console.log(err.response.body.data);
@@ -326,7 +346,6 @@ function RenderTiles(props) {
 }
 
 function RenderContent(props) {
-  console.log(props.reviews);
   if (props.isDisplayReview === false) {
     return (
       <div className="course-body">
@@ -346,13 +365,14 @@ function RenderContent(props) {
   } else {
     return (
       <div className="course-body">
-        <div className="course-body-review">
+        <div className="course-final-body-review">
           {props.reviews.map(review => (
             <Reviewcard
               title={review.title}
               rating={review.rating}
               content={review.description}
               date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+              reviewUsername = {review.username}
             />
           ))}
         </div>

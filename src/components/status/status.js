@@ -15,6 +15,7 @@ class Status extends Component {
   componentDidMount() {
     const profile = auth.getProfile();
     if (profile) {
+      console.log("Profile Name Logged is ", profile)
       this.setState({ name: profile.name });
     }
   }
@@ -25,7 +26,7 @@ class Status extends Component {
 
   logoutUser = () => {
     auth.logout();
-    this.props.history.push("/course");
+    this.props.history.push("/");
   };
   render() {
     return (

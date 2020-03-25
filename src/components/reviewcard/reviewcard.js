@@ -10,6 +10,7 @@ export class Reviewcard extends Component {
     const rating = this.props.rating;
     const content = this.props.content;
     const date = this.props.date;
+    const reviewUsername = this.props.reviewUsername
     return (
       <div className="review-total">
         <div className="review-avatar">
@@ -18,7 +19,7 @@ export class Reviewcard extends Component {
             className="review-avatar-image"
             src={Avatarblack}
           />
-          <div className="review-avatar-name">John Tan</div>
+          <div className="review-avatar-name">{reviewUsername}</div>
         </div>
         <div className="review-card">
           <div className="review-card-top">
