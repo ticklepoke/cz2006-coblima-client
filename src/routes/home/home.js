@@ -2,8 +2,6 @@ import React, { Fragment, Component } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
 import home from "../../images/home.svg";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import Title from "../../components/title/title";
 import Status from "../../components/status/status";
 import "./home.css";
@@ -67,32 +65,7 @@ class Home extends Component {
         {/* Header Tab */}
 
         <Title color="white" data-aos="fade" />
-
-        {!auth.loggedIn() ? (
-          <div className="buttons">
-            <Link to="/register" className="no-underline">
-              <Button
-                variant="primary"
-                size="lg"
-                className="form-button register-button"
-              >
-                REGISTER
-              </Button>
-            </Link>
-            <Link to="/login" className="no-underline">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="form-button login-button"
-              >
-                LOGIN
-              </Button>
-            </Link>
-          </div>
-        ) : (
-          <Status />
-        )}
-
+        <Status />
         <Searchbar
           data-aos="fade-in"
           className="home-searchbar"

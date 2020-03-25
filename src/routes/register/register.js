@@ -124,18 +124,22 @@ class Register extends Component {
                 text="Matriculation Number"
                 name="matriculationNumber"
                 changeInput={this.handleChange}
+                maxLength="9"
+                minLength="9"
               />
               <Inputbar
-                text="Password"
+                text="Password (min 6 char)"
                 type="password"
                 name="password"
                 changeInput={this.handleChange}
+                minLength="6"
               />
               <Inputbar
                 text="Confirm Password"
                 type="password"
                 name="confirmPassword"
                 changeInput={this.handleChange}
+                minLength="6"
               />
               <Submitbutton text="Register" clickedSubmit={this.handleSubmit} />
             </form>
