@@ -51,6 +51,7 @@ class History extends Component {
           date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
           deleteReview={this.deleteReview}
           id={review._id}
+          edited={review.edited}
         />
       );
     });

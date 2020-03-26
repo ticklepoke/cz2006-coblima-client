@@ -14,10 +14,6 @@ import Review from "../review/review";
 import History from "../history/history";
 import Editreview from "../editreview/editreview";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-AOS.init();
 export default function App() {
   return (
     <Router>

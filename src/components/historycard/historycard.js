@@ -26,6 +26,7 @@ export class Historycard extends Component {
     const content = this.props.content;
     const date = this.props.date;
     const reviewID = this.props.id;
+    const edited = this.props.edited;
     return (
       <div className="history-card">
         <div className="history-card-top">
@@ -39,7 +40,7 @@ export class Historycard extends Component {
         </div>
         <div className="history-card-bot">
           <div className="history-card-bot-date">
-            {this.state.course.courseCode} | {date}
+            {this.state.course.courseCode} | {date} {edited ? "| Edited" : ""}
           </div>
           <div className="dual-link-buttons">
             <Link

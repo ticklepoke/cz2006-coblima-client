@@ -75,7 +75,8 @@ class Editreview extends Component {
         {
           title: this.state.title,
           description: this.state.content,
-          rating: this.state.rating
+          rating: this.state.rating,
+          edited: "true"
         },
         retrieveAuthenticationHeader()
       )
