@@ -13,7 +13,7 @@ export class Reviewcard extends Component {
     const date = this.props.date;
     const reviewUsername = this.props.reviewUsername;
     return (
-      <Fade left>
+      <Fade bottom>
         <div className="review-total">
           <div className="review-avatar">
             <img
