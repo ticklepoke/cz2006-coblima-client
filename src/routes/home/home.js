@@ -1,6 +1,10 @@
+//dependencies
 import React, { Fragment, Component } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
+import Fade from "react-reveal/Fade";
+
+//assets
 import home from "../../images/home.svg";
 import Title from "../../components/title/title";
 import Status from "../../components/status/status";
@@ -57,11 +61,16 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <img src={home} className="home-image" alt="home" />
-        <Title color="white" />
-        <Status />
+        <Fade>
+          <img src={home} className="home-image" alt="home" />
+        </Fade>
+        <Fade left duration={1000}>
+          <Title color="white" />
+        </Fade>
+        <Fade right duration={1000}>
+          <Status />
+        </Fade>
         <Searchbar
-          className="home-searchbar"
           searchbarStyle={
             this.state.searchResults.length === 0
               ? {
