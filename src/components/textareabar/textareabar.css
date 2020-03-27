@@ -29,6 +29,7 @@ button:focus {
   border-radius: 15px;
   margin-bottom: 5%;
   font-family: Roboto;
+  padding: 20px;
 }
 
 .textarea-text {
@@ -36,8 +37,17 @@ button:focus {
   width: 100%;
   height: auto;
   font-size: 20px;
-  margin: 0px 25px;
   background-color: none;
   font-family: Roboto;
   flex-wrap: wrap;
+}
+
+.textarea-count {
+  display: flex;
+  font-family: Roboto;
+  font-size: 16px;
+  color: gray;
+  align-self: flex-end;
+  width: auto;
+  white-space: nowrap;
 }

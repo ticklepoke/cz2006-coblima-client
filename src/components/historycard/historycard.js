@@ -3,13 +3,30 @@ import { Link } from "react-router-dom";
 import "./historycard.css";
 
 import RatingStars from "../reviewstars/reviewstars";
+import axios from "axios";
 
 export class Historycard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      course: {}
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://35.240.245.213/api/v1/courses/" + this.props.course)
+      .then(res => this.setState({ course: res.data.data }))
+      .catch(err => console.log(err));
+  }
+
   render() {
     const title = '"' + this.props.title + '"';
     const rating = this.props.rating;
     const content = this.props.content;
     const date = this.props.date;
+    const reviewID = this.props.id;
+    const edited = this.props.edited;
     return (
       <div className="history-card">
         <div className="history-card-top">
@@ -22,7 +39,9 @@ export class Historycard extends Component {
           <div className="history-card-mid-content">{content}</div>
         </div>
         <div className="history-card-bot">
-          <div className="history-card-bot-date">{date}</div>
+          <div className="history-card-bot-date">
+            {this.state.course.courseCode} | {date} {edited ? "| Edited" : ""}
+          </div>
           <div className="dual-link-buttons">
             <Link
               to={{
@@ -31,7 +50,9 @@ export class Historycard extends Component {
                   title: title,
                   rating: rating,
                   content: content,
-                  date: date
+                  date: date,
+                  course: this.state.course,
+                  reviewID: reviewID
                 }
               }}
             >
@@ -39,11 +60,15 @@ export class Historycard extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/history">
-              <button type="submit" className="delete-button dual-button">
-                Delete
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                this.props.deleteReview(this.props.id);
+              }}
+              type="submit"
+              className="delete-button dual-button"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

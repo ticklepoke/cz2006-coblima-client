@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { Flip, LightSpeed } from "react-reveal";
+
 import "./register.css";
 import LoginLogo from "../../images/login.svg";
 import Title from "../../components/title/title";
@@ -88,7 +90,7 @@ class Register extends Component {
         this.state.name,
         this.state.matriculationNumber
       )
-      .then(res => this.props.history.push("course"))
+      .then(this.props.history.push("/login"))
       .catch(err => console.log(err));
   }
 
@@ -97,12 +99,16 @@ class Register extends Component {
       <div className="register-container">
         <div className="register-left-column">
           <Title />
-          <img src={LoginLogo} alt="Login-Logo" className="register-logo" />
+          <LightSpeed left>
+            <img src={LoginLogo} alt="Login-Logo" className="register-logo" />
+          </LightSpeed>
         </div>
 
         <div className="register-right-column">
           <div className="register-right-container">
-            <h2 className="register-header">Register</h2>
+            <Flip top delay={600}>
+              <h2 className="register-header">Register</h2>
+            </Flip>
             <Link to="/login">
               <p className="register-subheader">Click here for login</p>
             </Link>
@@ -124,18 +130,22 @@ class Register extends Component {
                 text="Matriculation Number"
                 name="matriculationNumber"
                 changeInput={this.handleChange}
+                maxLength="9"
+                minLength="9"
               />
               <Inputbar
-                text="Password"
+                text="Password (min 6 char)"
                 type="password"
                 name="password"
                 changeInput={this.handleChange}
+                minLength="6"
               />
               <Inputbar
                 text="Confirm Password"
                 type="password"
                 name="confirmPassword"
                 changeInput={this.handleChange}
+                minLength="6"
               />
               <Submitbutton text="Register" clickedSubmit={this.handleSubmit} />
             </form>

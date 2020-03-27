@@ -1,20 +1,15 @@
-import React, { Fragment, Component } from "react";
+//dependencies
+import React, { Component } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
+import Fade from "react-reveal/Fade";
+
+//assets
 import home from "../../images/home.svg";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import Title from "../../components/title/title";
 import Status from "../../components/status/status";
 import "./home.css";
 import Searchbar from "../../components/searchbar/searchbar";
-
-import authService from "../../services/authService";
-import AOS from "aos";
-
-const auth = new authService("http://35.240.245.213");
-
-AOS.init();
 
 class Home extends Component {
   constructor(props) {
@@ -23,6 +18,7 @@ class Home extends Component {
       searchResults: []
     };
   }
+
   getSearchSuggestion = term => {
     axios
       .get("http://35.240.245.213/api/v1/courses", {
@@ -45,12 +41,7 @@ class Home extends Component {
     const results = this.state.searchResults.slice(0, 4).map(course => {
       return (
         <div
-          style={{
-            cursor: "pointer",
-            backgroundColor: "#fff",
-            width: "100%",
-            fontSize: 30
-          }}
+          className="search-results"
           onClick={() => {
             this.props.history.push({
               pathname: "/course",
@@ -67,77 +58,39 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <img src={home} className="home-image" alt="home" />
-
-        {/* Header Tab */}
-
-        <Title color="white" data-aos="fade" />
-
-        {!auth.loggedIn() ? (
-          <div className="buttons">
-            <Link to="/register" className="no-underline">
-              <Button
-                variant="primary"
-                size="lg"
-                className="form-button register-button"
-              >
-                REGISTER
-              </Button>
-            </Link>
-            <Link to="/login" className="no-underline">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="form-button login-button"
-              >
-                LOGIN
-              </Button>
-            </Link>
-          </div>
-        ) : (
+        <Fade>
+          <img src={home} className="home-image" alt="home" />
+        </Fade>
+        <Fade left duration={1000}>
+          <Title color="white" />
+        </Fade>
+        <Fade right duration={1000}>
           <Status />
-        )}
-
+        </Fade>
         <Searchbar
-          data-aos="fade-in"
-          className="home-searchbar"
-          searchbarStyle={this.state.searchResults.length === 0 ? {
-            "z-index": "1",
-            position: "absolute",
-            top: "53%",
-            left: "30%",
-            transition: "all 1.9s",
-          } : {
-            "z-index": "1",
-            position: "absolute",
-            top: "53%",
-            left: "30%",
-            borderRadius: "25px 25px 0px 0px",
-            transition: "all 1.9s",
-          }}
+          delay={700}
+          duration={1000}
+          searchbarStyle={
+            this.state.searchResults.length === 0
+              ? {
+                  "z-index": "1",
+                  position: "absolute",
+                  top: "53%",
+                  left: "30%",
+                  transition: "all 0.5s"
+                }
+              : {
+                  "z-index": "1",
+                  position: "absolute",
+                  top: "53%",
+                  left: "30%",
+                  borderRadius: "10px 10px 0px 0px",
+                  transition: "all 0.5s"
+                }
+          }
           searchTerm={term => this.getSearchSuggestion(term)}
         />
-        {this.state.searchResults.length === 0 ?           
-        <div
-            style={{
-              position: "absolute",
-              top: "60%",
-              left: "30%",
-              width: "55%",
-              backgroundColor: "white",
-              textAlign: "start",
-              boxShadow: "2px 2px 3px #777",
-              paddingTop: "4%",
-              paddingBottom: 10,
-              paddingRight: 20,
-              paddingLeft: 20,
-              borderRadius: '0px 0px 10px 10px',
-              opacity: 0,
-              transition: "opacity 0.6s",
-            }}
-          >
-            {this.renderSuggestions()}
-          </div> : (
+        {this.state.searchResults.length === 0 ? (
           <div
             style={{
               position: "absolute",
@@ -151,8 +104,29 @@ class Home extends Component {
               paddingBottom: 10,
               paddingRight: 20,
               paddingLeft: 20,
-              borderRadius: '0px 0px 10px 10px',
-              transition: "opacity 0.9s",
+              borderRadius: "0px 0px 10px 10px",
+              opacity: 0,
+              transition: "opacity 0.6s"
+            }}
+          >
+            {this.renderSuggestions()}
+          </div>
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: "60%",
+              left: "30%",
+              width: "55%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "4%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              transition: "opacity 0.9s"
             }}
           >
             {this.renderSuggestions()}

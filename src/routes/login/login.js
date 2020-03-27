@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { Flip, LightSpeed } from "react-reveal";
 import "./login.css";
+
 import LoginLogo from "../../images/login.svg";
 import Title from "../../components/title/title";
 import { Link } from "react-router-dom";
 import Inputbar from "../../components/inputbar/inputbar";
 import Submitbutton from "../../components/submitbutton/submitbutton";
 
-import axios from "axios";
 import AuthService from "../../services/authService";
-
 const auth = new AuthService("http://35.240.245.213");
 
 class Login extends Component {
@@ -79,12 +79,16 @@ class Login extends Component {
       <div className="login-container">
         <div className="login-left-column">
           <Title />
-          <img src={LoginLogo} alt="Login-Logo" className="login-logo" />
+          <LightSpeed left>
+            <img src={LoginLogo} alt="Login-Logo" className="login-logo" />
+          </LightSpeed>
         </div>
 
         <div className="login-right-column">
           <div className="login-right-container">
-            <h2 className="login-header">Login</h2>
+            <Flip top delay={600}>
+              <h2 className="login-header">Login</h2>
+            </Flip>
             <Link to="/register">
               <p className="login-subheader">Click here to register</p>
             </Link>

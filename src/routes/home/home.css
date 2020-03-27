@@ -9,12 +9,24 @@
   left: 0;
 }
 
+.search-results {
+  cursor: pointer;
+  background-color: #fff;
+  width: 100%;
+  font-size: 30px;
+}
+
+.search-results:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
 .buttons {
   display: flex;
   flex-direction: row-reverse;
   position: fixed;
   height: 125px;
-  width: 100%;
+  width: 20%;
   top: 0;
   align-items: center;
   right: 20px;

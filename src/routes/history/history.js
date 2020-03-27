@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./history.css";
 //images
 import ActiveReview from "../../images/active-review.svg";
 
 //components
 import Title from "../../components/title/title";
-import Searchbar from "../../components/searchbar/searchbar";
 import Activetile from "../../components/activetile/activetile";
 import Status from "../../components/status/status";
 import Historycard from "../../components/historycard/historycard";
@@ -17,7 +15,7 @@ import moment from "moment";
 
 const auth = new authService("http://35.240.245.213");
 
-class Course extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,13 +41,16 @@ class Course extends Component {
   renderHistoryCards = () => {
     if (this.state.reviews.length === 0) return;
     const cards = this.state.reviews.map(review => {
-      console.log(review);
       return (
         <Historycard
+          course={review.course}
           title={review.title}
           rating={review.rating}
           content={review.description}
           date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+          deleteReview={this.deleteReview}
+          id={review._id}
+          edited={review.edited}
         />
       );
     });
@@ -60,32 +61,32 @@ class Course extends Component {
     console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
+
+  deleteReview = id => {
+    this.setState({
+      reviews: this.state.reviews.filter(review => review._id !== id)
+    });
+    axios
+      .delete("http://35.240.245.213/api/v1/reviews/" + id)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.response));
+  };
   render() {
     const { name, matriculationNumber } = auth.getProfile();
     return (
-      <div className="course-container">
-        <div className="course-navbar">
+      <div className="history-container">
+        <div className="history-navbar">
           <Title />
-          <Searchbar
-            className="course-searchbar"
-            searchbarStyle={{
-              position: "fixed",
-              top: "30px",
-              left: "350px",
-              padding: "10px 30px",
-              width: "45%"
-            }}
-          />
           <Status />
         </div>
-        <div className="course-header">
-          <div className="course-header-left">
-            <div className="course-header-title">{name}</div>
-            <div className="course-header-bot">
-              <div className="course-header-code">{matriculationNumber}</div>
+        <div className="history-header">
+          <div className="history-header-left">
+            <div className="history-header-title">{name}</div>
+            <div className="history-header-bot">
+              <div className="history-header-code">{matriculationNumber}</div>
             </div>
           </div>
-          <div className="course-header-right">
+          <div className="history-header-right">
             <Activetile
               image={ActiveReview}
               number={this.state.reviews.length}
@@ -93,12 +94,12 @@ class Course extends Component {
             />
           </div>
         </div>
-        <div className="course-body">
-          <div className="course-body-review">{this.renderHistoryCards()}</div>
+        <div className="history-body">
+          <div className="history-body-review">{this.renderHistoryCards()}</div>
         </div>
       </div>
     );
   }
 }
 
-export default Course;
+export default History;

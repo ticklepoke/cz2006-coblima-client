@@ -3,6 +3,10 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import axios from "axios";
+import moment from "moment";
+import { Pulse } from "react-motions";
+import { Fade } from "react-reveal";
+//styles
 import "./course.css";
 //images
 import ActiveRating from "../../images/active-rating.svg";
@@ -12,7 +16,6 @@ import InactiveRating from "../../images/inactive-rating.svg";
 import InactiveReview from "../../images/inactive-review.svg";
 import InactiveCredits from "../../images/inactive-credits.svg";
 import course from "../../images/course.svg";
-import moment from "moment";
 //components
 import Title from "../../components/title/title";
 import Searchbar from "../../components/searchbar/searchbar";
@@ -32,7 +35,8 @@ class Course extends Component {
         academicUnits: 0,
         courseCode: ""
       },
-      reviews: []
+      reviews: [],
+      searchResults: []
     };
   }
 
@@ -50,7 +54,6 @@ class Course extends Component {
       )
       .then(res => {
         this.setState({ course: res.data.data });
-        console.log(res.data.data._id);
         axios
           .get(
             "http://35.240.245.213/api/v1/courses/" +
@@ -59,7 +62,21 @@ class Course extends Component {
           )
           .then(res => {
             // setState reviewData
+            let userId;
             let reviewData = res.data.data;
+
+            // retrieve user name from user id in each review
+            reviewData.forEach(review => {
+              userId = review.user;
+              axios
+                .get("http://35.240.245.213/api/v1/users/" + userId)
+                .then(res => {
+                  review["username"] = res.data.data.name;
+                })
+                .catch(err => console.log(err.response));
+            });
+
+            // set state for reviewData as reviews
             this.setState({ reviews: reviewData });
 
             // calculate averageReview
@@ -67,6 +84,7 @@ class Course extends Component {
             reviewData.forEach(review => {
               sumReviews += review["rating"];
             });
+
             let averageReview = sumReviews / reviewData.length;
             this.setState({ averageReview: averageReview });
           })
@@ -77,50 +95,185 @@ class Course extends Component {
 
   toggleShowReview = event => {
     let currentIsDiplayReview = this.state.isDisplayReview;
-    console.log("Toggling now, current:" + currentIsDiplayReview);
     this.setState({ isDisplayReview: !currentIsDiplayReview });
   };
 
-  // searchCourse(term) {
-  //   axios
-  //     .get("http://35.240.245.213/api/v1/courses", {
-  //       params: {
-  //         search: term
-  //       }
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //       alert("Search Results: " + res.data.data[0].title.toLowerCase());
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response.body.data);
-  //     });
-  // }
+  fetchData = course => {
+    axios
+      .get("http://35.240.245.213/api/v1/courses/" + course._id)
+      .then(res => {
+        this.setState({ course: res.data.data });
+        axios
+          .get(
+            "http://35.240.245.213/api/v1/courses/" +
+              res.data.data._id +
+              "/reviews"
+          )
+          .then(res => {
+            // setState reviewData
+            let userId;
+            let reviewData = res.data.data;
 
+            // retrieve user name from user id in each review
+            reviewData.forEach(review => {
+              userId = review.user;
+              axios
+                .get("http://35.240.245.213/api/v1/users/" + userId)
+                .then(res => {
+                  review["username"] = res.data.data.name;
+                })
+                .catch(err => console.log(err.response));
+            });
+            console.log("Setting Review Data to", reviewData);
+            // set state for reviewData as reviews
+            this.setState({ reviews: reviewData });
+            console.log("this.state.reviews is", this.state.reviews);
+
+            // calculate averageReview
+            let sumReviews = 0;
+            reviewData.forEach(review => {
+              sumReviews += review["rating"];
+            });
+
+            let averageReview = sumReviews / reviewData.length;
+            this.setState({ averageReview: averageReview });
+            this.setState({ isDisplayReview: false });
+          })
+          .catch(err => console.log(err.response));
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  searchTerm = term => {
+    axios
+      .get("http://35.240.245.213/api/v1/courses", {
+        params: {
+          search: term
+        }
+      })
+      .then(res => {
+        this.setState({ searchResults: res.data.data });
+      })
+      .catch(err => {
+        console.log(err.response.body.data);
+      });
+  };
+
+  renderSuggestions = () => {
+    if (this.state.searchResults < 1) {
+      return null;
+    }
+    const results = this.state.searchResults.slice(0, 4).map(course => {
+      return (
+        <div
+          className="search-results"
+          onClick={() => {
+            this.setState({ searchResults: [] });
+            this.fetchData(course);
+          }}
+        >
+          <p>{course.courseCode + ": " + titleCase(course.title)}</p>
+        </div>
+      );
+    });
+    return results;
+  };
   render() {
     const { title, courseCode } = this.state.course;
     return (
       <div className="course-container">
-        <div className="course-navbar">
-          <Title />
-          <Searchbar
-            className="course-searchbar"
-            searchbarStyle={{
+        <Searchbar
+          delay={100}
+          duration={800}
+          className="course-searchbar"
+          searchbarStyle={
+            this.state.searchResults.length === 0
+              ? {
+                  position: "fixed",
+                  top: "30px",
+                  left: "350px",
+                  transition: "all 0.5s",
+                  zIndex: 99,
+                  width: "45%",
+                  padding: "10px 30px"
+                }
+              : {
+                  position: "fixed",
+                  top: "30px",
+                  left: "350px",
+                  borderRadius: "10px 10px 0px 0px",
+                  transition: "all 0.5s",
+                  zIndex: 99,
+                  width: "45%",
+                  padding: "10px 30px"
+                }
+          }
+          searchTerm={this.searchTerm}
+        />
+        {this.state.searchResults.length === 0 ? (
+          <div
+            style={{
               position: "fixed",
               top: "30px",
               left: "350px",
-              padding: "10px 30px",
-              width: "45%"
+              width: "45%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "2%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              opacity: 0,
+              transition: "opacity 0.6s",
+              zIndex: 98
             }}
-          />
+          >
+            {this.renderSuggestions()}
+          </div>
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: "80px",
+              left: "350px",
+              width: "45%",
+              backgroundColor: "white",
+              textAlign: "start",
+              boxShadow: "2px 2px 3px #777",
+              paddingTop: "2%",
+              paddingBottom: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: "0px 0px 10px 10px",
+              transition: "opacity 0.9s",
+              zIndex: 97
+            }}
+          >
+            {this.renderSuggestions()}
+          </div>
+        )}
+
+        <div className="course-navbar">
+          <Title />
+
           <Status />
         </div>
         <div className="course-header">
           <div className="course-header-left">
-            <div className="course-header-title">{titleCase(title)}</div>
+            <div className="course-header-final-title">{titleCase(title)}</div>
             <div className="course-header-bot">
               <div className="course-header-code">{courseCode}</div>
-              <Link to="/review" className="no-underline">
+              <Link
+                to={{
+                  pathname: "/review",
+                  state: {
+                    selectedCourse: this.state.course
+                  }
+                }}
+                className="no-underline"
+              >
                 <Button className="course-header-button">ADD REVIEW</Button>
               </Link>
             </div>
@@ -147,20 +300,23 @@ class Course extends Component {
 export default withRouter(Course);
 
 function RenderTiles(props) {
+  const averageReview = Math.round(props.averageReview * 10) / 10 || "-";
   if (props.isDisplayReview === false) {
     return (
       <div className="course-header-right">
         <Activetile
           image={ActiveRating}
-          number={props.averageReview + " / 5"}
+          number={averageReview + " / 5"}
           caption={"Overall Rating"}
         />
         <div onClick={props.toggleShowReview}>
-          <Inactivetile
-            image={InactiveReview}
-            number={props.reviews.length}
-            caption={"Reviews"}
-          />
+          <Pulse infinite>
+            <Inactivetile
+              image={InactiveReview}
+              number={props.reviews.length}
+              caption={"Reviews"}
+            />
+          </Pulse>
         </div>
         <Inactivetile
           image={InactiveCredits}
@@ -173,11 +329,13 @@ function RenderTiles(props) {
     return (
       <div className="course-header-right">
         <div onClick={props.toggleShowReview}>
-          <Inactivetile
-            image={InactiveRating}
-            number={props.averageReview + " / 5"}
-            caption={"Overall Rating"}
-          />
+          <Pulse infinite>
+            <Inactivetile
+              image={InactiveRating}
+              number={averageReview + " / 5"}
+              caption={"Overall Rating"}
+            />
+          </Pulse>
         </div>
         <Activetile
           image={ActiveReview}
@@ -195,7 +353,6 @@ function RenderTiles(props) {
 }
 
 function RenderContent(props) {
-  console.log(props.reviews);
   if (props.isDisplayReview === false) {
     return (
       <div className="course-body">
@@ -204,7 +361,7 @@ function RenderContent(props) {
             {props.course.description}
           </div>
           <div className="course-body-prereq">
-            Course Prerequisites: FE5101 - Derivatives and Fixed Income
+            Course Prerequisites: {props.course.prerequisite}
           </div>
         </div>
         <div className="course-body-right">
@@ -215,13 +372,14 @@ function RenderContent(props) {
   } else {
     return (
       <div className="course-body">
-        <div className="course-body-review">
+        <div className="course-final-body-review">
           {props.reviews.map(review => (
             <Reviewcard
               title={review.title}
               rating={review.rating}
               content={review.description}
               date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+              reviewUsername={review.username}
             />
           ))}
         </div>

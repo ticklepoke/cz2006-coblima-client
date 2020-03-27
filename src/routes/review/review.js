@@ -39,27 +39,14 @@ class Review extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (
-  //     this.props.location.state.Title &&
-  //     this.props.location.state.Content &&
-  //     this.props.location.state.Rating
-  //   ) {
-  //     this.setState({
-  //       title: this.props.location.state.Title,
-  //       content: this.props.location.state.Content,
-  //       rating: this.props.location.state.Rating
-  //     });
-  //   }
-  // }
-
-  // handleTitleChange = event => {
-  //   this.setState({ title: event.target.value });
-  // };
-
-  // handleContentChange = event => {
-  //   this.setState({ content: event.target.value });
-  // };
+  componentDidMount() {
+    if (this.props.location.state === undefined) return;
+    if (this.props.location.state.selectedCourse) {
+      this.setState({
+        selectedCourse: this.props.location.state.selectedCourse
+      });
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -74,14 +61,7 @@ class Review extends Component {
     ) {
       return;
     }
-    // alert(
-    //   "Submitted Title: " +
-    //     this.state.title +
-    //     " Submitted Content: " +
-    //     this.state.content +
-    //     "with rating: " +
-    //     this.state.rating
-    // );
+
     axios
       .post(
         `http://35.240.245.213/api/v1/courses/${this.state.selectedCourse._id}/reviews`,
@@ -94,7 +74,10 @@ class Review extends Component {
       )
       .then(res => {
         alert("Review Added!");
-        this.props.history.push("/course");
+        this.props.history.push({
+          pathname: "/course",
+          state: { course: this.state.selectedCourse }
+        });
       })
       .catch(err => {
         console.log(err.response);
@@ -205,15 +188,16 @@ class Review extends Component {
                 </Fragment>
               )}
               <InputBar
-                text="Input Review Title:"
+                text="Input Review Title: (max 25 characters)"
                 inputbarStyle={{
                   margin: "10px 10px"
                 }}
                 name="title"
                 changeInput={this.handleChange}
+                maxLength="25"
               />
               <Textareabar
-                text="Enter Review Here..."
+                text="Enter Review Here: (max 300 characters)"
                 inputbarStyle={{
                   height: "55%",
                   alignItems: "flex-start",
@@ -222,6 +206,8 @@ class Review extends Component {
                 }}
                 name="content"
                 changeInput={this.handleChange}
+                maxLength="300"
+                textCount={this.state.content.length}
               />
               <div className="review-body-form-bot">
                 <span className="rating-label">Rating</span>
@@ -246,7 +232,7 @@ class Review extends Component {
             </div>
           </div>
           <div className="review-body-right">
-            <img className="review-body-right-image" src={ReviewImage} />
+            <img className="review-body-right-image" alt="Review SVG" src={ReviewImage} />
           </div>
         </div>
       </div>

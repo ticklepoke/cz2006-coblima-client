@@ -41,14 +41,16 @@ class Editreview extends Component {
 
   componentDidMount() {
     if (
+      this.props.location.state.course &&
       this.props.location.state.title &&
       this.props.location.state.content &&
       this.props.location.state.rating
     ) {
       this.setState({
-        title: this.props.location.state.title,
+        title: this.props.location.state.title.slice(1, -1),
         content: this.props.location.state.content,
-        rating: this.props.location.state.rating
+        rating: this.props.location.state.rating,
+        selectedCourse: this.props.location.state.course
       });
     }
   }
@@ -66,21 +68,15 @@ class Editreview extends Component {
     ) {
       return;
     }
-    // alert(
-    //   "Submitted Title: " +
-    //     this.state.title +
-    //     " Submitted Content: " +
-    //     this.state.content +
-    //     "with rating: " +
-    //     this.state.rating
-    // );
     axios
-      .post(
-        `http://35.240.245.213/api/v1/courses/${this.state.selectedCourse._id}/reviews`,
+      .put(
+        "http://35.240.245.213/api/v1/reviews/" +
+          this.props.location.state.reviewID,
         {
           title: this.state.title,
           description: this.state.content,
-          rating: this.state.rating
+          rating: this.state.rating,
+          edited: "true"
         },
         retrieveAuthenticationHeader()
       )
@@ -177,7 +173,6 @@ class Editreview extends Component {
                       margin: "10px 10px"
                     }}
                     changeInput={this.handleCourseSearch}
-                    // disabled={true}
                   />
 
                   <div
@@ -197,16 +192,17 @@ class Editreview extends Component {
                 </Fragment>
               )}
               <InputBar
-                text="Input Review Title:"
+                text="Input Review Title: (max 25 characters)"
                 inputbarStyle={{
                   margin: "10px 10px"
                 }}
                 name="title"
                 changeInput={this.handleChange}
+                maxLength="25"
                 value={this.state.title}
               />
               <Textareabar
-                text="Enter Review Here..."
+                text="Enter Review Here: (max 300 characters)"
                 inputbarStyle={{
                   height: "55%",
                   alignItems: "flex-start",
@@ -215,6 +211,8 @@ class Editreview extends Component {
                 }}
                 name="content"
                 changeInput={this.handleChange}
+                maxLength="300"
+                textCount={this.state.content.length}
                 value={this.state.content}
               />
               <div className="review-body-form-bot">
@@ -240,7 +238,7 @@ class Editreview extends Component {
             </div>
           </div>
           <div className="review-body-right">
-            <img className="review-body-right-image" src={ReviewImage} />
+            <img className="review-body-right-image" alt="Review SVG" src={ReviewImage} />
           </div>
         </div>
       </div>

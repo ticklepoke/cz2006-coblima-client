@@ -15,3 +15,7 @@
   top: 10px;
   left: 40px;
 }
+
+.html {
+  overflow-y: scroll;
+}

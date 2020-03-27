@@ -20,12 +20,6 @@ button:focus {
   outline: none;
 }
 
-/* Add button focus on hover */
-.submit-logo:hover {
-  transform: scale(1.2);
-  transition: transform 0.1s;
-}
-
 .searchbar-container {
   display: flex;
   align-items: center;

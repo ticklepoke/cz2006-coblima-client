@@ -10,10 +10,9 @@ class Title extends Component {
   render() {
     return (
       <Link to="/">
-        {" "}
         <h1 className="coblima-title" style={{ color: this.props.color }}>
           COBLIMA
-        </h1>{" "}
+        </h1>
       </Link>
     );
   }

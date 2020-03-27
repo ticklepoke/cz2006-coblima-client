@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./profile.css";
 import ProfileLogo from "../../images/profile.svg";
@@ -173,7 +172,6 @@ class Profile extends Component {
               }
               style={{ cursor: "pointer" }}
             >
-              {" "}
               View Review History
             </button>
           </div>
