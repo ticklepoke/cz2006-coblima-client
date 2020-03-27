@@ -50,7 +50,7 @@ export default class AuthService {
       return this.fetch(`${this.domain}/api/v1/auth/me`, {
         method: "GET"
       }).then(res => {
-        this.setProfile(res.data);
+        // this.setProfile(res.data);
         return Promise.resolve(res.data);
       });
     });
