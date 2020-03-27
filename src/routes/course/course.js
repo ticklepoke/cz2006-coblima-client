@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import moment from "moment";
 import { Pulse } from "react-motions";
+import { Fade } from "react-reveal";
 //styles
 import "./course.css";
 //images
@@ -182,6 +183,8 @@ class Course extends Component {
     return (
       <div className="course-container">
         <Searchbar
+          delay={100}
+          duration={800}
           className="course-searchbar"
           searchbarStyle={
             this.state.searchResults.length === 0
@@ -326,11 +329,13 @@ function RenderTiles(props) {
     return (
       <div className="course-header-right">
         <div onClick={props.toggleShowReview}>
-          <Inactivetile
-            image={InactiveRating}
-            number={props.averageReview + " / 5"}
-            caption={"Overall Rating"}
-          />
+          <Pulse infinite>
+            <Inactivetile
+              image={InactiveRating}
+              number={averageReview + " / 5"}
+              caption={"Overall Rating"}
+            />
+          </Pulse>
         </div>
         <Activetile
           image={ActiveReview}

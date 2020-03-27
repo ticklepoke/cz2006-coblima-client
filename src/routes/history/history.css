@@ -1,4 +1,4 @@
-.course-container {
+.history-container {
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-.course-navbar {
+.history-navbar {
   z-index: 2;
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@
   background-color: #ffffff;
 }
 
-.course-header {
+.history-header {
   z-index: 2;
   display: flex;
   flex-direction: row;
@@ -31,26 +31,26 @@
   background-color: #ffffff;
 }
 
-.course-header-left {
+.history-header-left {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
   padding-left: 100px;
 }
 
-.course-header-title {
+.history-header-title {
   display: flex;
   font-family: Limelight;
   font-size: 3em;
   color: black;
 }
 
-.course-header-bot {
+.history-header-bot {
   display: flex;
   align-items: center;
 }
 
-.course-header-code {
+.history-header-code {
   display: flex;
   font-family: ReemKufi;
   font-size: 2.5em;
@@ -58,7 +58,7 @@
   margin-right: 30px;
 }
 
-.course-header-button {
+.history-header-button {
   display: flex;
   background-color: #8580dd;
   font-family: ReemKufi;
@@ -69,14 +69,14 @@
   padding: 0px 0px;
 }
 
-.course-header-right {
+.history-header-right {
   display: flex;
   justify-content: flex-end;
   padding-right: 80px;
-  width: 50%;
+  width: 40%;
 }
 
-.course-body {
+.history-body {
   display: flex;
   position: relative;
   top: 290px;
@@ -84,14 +84,14 @@
   padding: 50px 0px;
 }
 
-.course-body-left {
+.history-body-left {
   display: flex;
   flex-direction: column;
   width: 50%;
   padding: 0px 100px;
 }
 
-.course-body-description {
+.history-body-description {
   display: flex;
   font-family: Roboto;
   font-size: 23px;
@@ -99,21 +99,21 @@
   margin-bottom: 30px;
 }
 
-.course-body-prereq {
+.history-body-prereq {
   display: flex;
   font-family: Roboto;
   font-size: 18px;
   font-weight: 600;
 }
 
-.course-body-right {
+.history-body-right {
   display: flex;
   width: 50%;
   align-items: center;
   justify-content: center;
 }
 
-.course-searchbar {
+.history-searchbar {
   position: fixed;
   left: 30%;
 }
@@ -126,7 +126,7 @@
   margin: 0;
 }
 
-.course-body-review {
+.history-body-review {
   height: 100%;
   width: 100%;
   display: flex;

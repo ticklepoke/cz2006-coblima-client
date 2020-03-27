@@ -90,7 +90,7 @@ class Register extends Component {
         this.state.name,
         this.state.matriculationNumber
       )
-      .then(res => this.props.history.push("course"))
+      .then(this.props.history.push("/login"))
       .catch(err => console.log(err));
   }
 

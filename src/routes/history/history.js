@@ -74,19 +74,19 @@ class History extends Component {
   render() {
     const { name, matriculationNumber } = auth.getProfile();
     return (
-      <div className="course-container">
-        <div className="course-navbar">
+      <div className="history-container">
+        <div className="history-navbar">
           <Title />
           <Status />
         </div>
-        <div className="course-header">
-          <div className="course-header-left">
-            <div className="course-header-title">{name}</div>
-            <div className="course-header-bot">
-              <div className="course-header-code">{matriculationNumber}</div>
+        <div className="history-header">
+          <div className="history-header-left">
+            <div className="history-header-title">{name}</div>
+            <div className="history-header-bot">
+              <div className="history-header-code">{matriculationNumber}</div>
             </div>
           </div>
-          <div className="course-header-right">
+          <div className="history-header-right">
             <Activetile
               image={ActiveReview}
               number={this.state.reviews.length}
@@ -94,8 +94,8 @@ class History extends Component {
             />
           </div>
         </div>
-        <div className="course-body">
-          <div className="course-body-review">{this.renderHistoryCards()}</div>
+        <div className="history-body">
+          <div className="history-body-review">{this.renderHistoryCards()}</div>
         </div>
       </div>
     );

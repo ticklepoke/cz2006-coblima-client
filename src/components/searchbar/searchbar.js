@@ -20,7 +20,7 @@ class Searchbar extends React.Component {
 
   render() {
     return (
-      <Bounce  delay={700}>
+      <Bounce delay={this.props.delay} duration={this.props.duration}>
         <div className="searchbar-container" style={this.props.searchbarStyle}>
           <form onSubmit={this.handleSubmit} className="searchbar-form">
             <input

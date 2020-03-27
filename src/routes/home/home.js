@@ -68,6 +68,8 @@ class Home extends Component {
           <Status />
         </Fade>
         <Searchbar
+          delay={700}
+          duration={1000}
           searchbarStyle={
             this.state.searchResults.length === 0
               ? {
