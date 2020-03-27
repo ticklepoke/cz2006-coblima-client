@@ -5,10 +5,14 @@ import axios from "axios";
 import Fade from "react-reveal/Fade";
 
 //assets
-import home from "../../images/home.svg";
+import homeForeground from "../../images/home-foreground.svg";
+import homeBackground from "../../images/home-background.svg"
+import planet from "../../images/planet.svg";
+import ring from "../../images/ring.svg";
 import Title from "../../components/title/title";
 import Status from "../../components/status/status";
 import "./home.css";
+import "./star.css";
 import Searchbar from "../../components/searchbar/searchbar";
 
 class Home extends Component {
@@ -57,9 +61,19 @@ class Home extends Component {
   };
   render() {
     return (
-      <div className="App">
+      <div className="App home-background">
         <Fade>
-          <img src={home} className="home-image" alt="home" />
+          <div className="image-container">
+          <img src={homeBackground} className="home-image" alt="home" />
+            <div id="stars-group-2"></div>
+            <div id="stars-group-3"></div>
+            <div id="stars-group-4"></div>
+            <div id="stars-group-5"></div>
+            <div id="stars-group-6"></div>
+            <img src={homeForeground} className="home-image" alt="home" />
+            <div className="oval-shape"></div>
+            <img src={planet} className="planet-image" alt="planet" />
+          </div>
         </Fade>
         <Fade left duration={1000}>
           <Title color="white" />
