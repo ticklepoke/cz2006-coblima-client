@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withRouter } from "react-router";
 import "./searchbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Fade from "react-reveal/Fade";
+import Bounce from "react-reveal/Bounce";
 
 class Searchbar extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Searchbar extends React.Component {
 
   render() {
     return (
-      <Fade up delay={300}>
+      <Bounce  delay={700}>
         <div className="searchbar-container" style={this.props.searchbarStyle}>
           <form onSubmit={this.handleSubmit} className="searchbar-form">
             <input
@@ -40,7 +40,7 @@ class Searchbar extends React.Component {
             </button>
           </form>
         </div>
-      </Fade>
+      </Bounce>
     );
   }
 }

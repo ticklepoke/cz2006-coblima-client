@@ -5,7 +5,6 @@ import ActiveReview from "../../images/active-review.svg";
 
 //components
 import Title from "../../components/title/title";
-import Searchbar from "../../components/searchbar/searchbar";
 import Activetile from "../../components/activetile/activetile";
 import Status from "../../components/status/status";
 import Historycard from "../../components/historycard/historycard";
@@ -78,16 +77,6 @@ class History extends Component {
       <div className="course-container">
         <div className="course-navbar">
           <Title />
-          {/* <Searchbar
-            className="course-searchbar"
-            searchbarStyle={{
-              position: "fixed",
-              top: "30px",
-              left: "350px",
-              padding: "10px 30px",
-              width: "45%"
-            }}
-          /> */}
           <Status />
         </div>
         <div className="course-header">

@@ -238,7 +238,7 @@ class Editreview extends Component {
             </div>
           </div>
           <div className="review-body-right">
-            <img className="review-body-right-image" src={ReviewImage} />
+            <img className="review-body-right-image" alt="Review SVG" src={ReviewImage} />
           </div>
         </div>
       </div>

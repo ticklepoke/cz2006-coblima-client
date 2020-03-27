@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { Flip, LightSpeed } from "react-reveal";
+
 import "./register.css";
 import LoginLogo from "../../images/login.svg";
 import Title from "../../components/title/title";
@@ -97,12 +99,16 @@ class Register extends Component {
       <div className="register-container">
         <div className="register-left-column">
           <Title />
-          <img src={LoginLogo} alt="Login-Logo" className="register-logo" />
+          <LightSpeed left>
+            <img src={LoginLogo} alt="Login-Logo" className="register-logo" />
+          </LightSpeed>
         </div>
 
         <div className="register-right-column">
           <div className="register-right-container">
-            <h2 className="register-header">Register</h2>
+            <Flip top delay={600}>
+              <h2 className="register-header">Register</h2>
+            </Flip>
             <Link to="/login">
               <p className="register-subheader">Click here for login</p>
             </Link>

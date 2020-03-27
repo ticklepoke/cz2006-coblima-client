@@ -1,5 +1,5 @@
 //dependencies
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
@@ -10,9 +10,6 @@ import Title from "../../components/title/title";
 import Status from "../../components/status/status";
 import "./home.css";
 import Searchbar from "../../components/searchbar/searchbar";
-
-import authService from "../../services/authService";
-const auth = new authService("http://35.240.245.213");
 
 class Home extends Component {
   constructor(props) {
