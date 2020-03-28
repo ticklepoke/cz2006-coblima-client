@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import moment from "moment";
 import { Pulse } from "react-motions";
-import { Fade } from "react-reveal";
+import { Fade, LightSpeed } from "react-reveal";
 //styles
 import "./course.css";
 //images
@@ -183,8 +183,8 @@ class Course extends Component {
     return (
       <div className="course-container">
         <Searchbar
-          delay={100}
-          duration={800}
+          delay={1500}
+          duration={300}
           className="course-searchbar"
           searchbarStyle={
             this.state.searchResults.length === 0
@@ -254,39 +254,43 @@ class Course extends Component {
             {this.renderSuggestions()}
           </div>
         )}
-
-        <div className="course-navbar">
-          <Title />
-
-          <Status />
-        </div>
-        <div className="course-header">
-          <div className="course-header-left">
-            <div className="course-header-final-title">{titleCase(title)}</div>
-            <div className="course-header-bot">
-              <div className="course-header-code">{courseCode}</div>
-              <Link
-                to={{
-                  pathname: "/review",
-                  state: {
-                    selectedCourse: this.state.course
-                  }
-                }}
-                className="no-underline"
-              >
-                <Button className="course-header-button">ADD REVIEW</Button>
-              </Link>
-            </div>
+        <Fade top>
+          <div className="course-navbar">
+            <Title />
+            <Status />
           </div>
+        </Fade>
+        <Fade top>
+          <div className="course-header">
+            <div className="course-header-left">
+              <div className="course-header-final-title">
+                {titleCase(title)}
+              </div>
+              <div className="course-header-bot">
+                <div className="course-header-code">{courseCode}</div>
+                <Link
+                  to={{
+                    pathname: "/review",
+                    state: {
+                      selectedCourse: this.state.course
+                    }
+                  }}
+                  className="no-underline"
+                >
+                  <Button className="course-header-button">ADD REVIEW</Button>
+                </Link>
+              </div>
+            </div>
+            <RenderTiles
+              isDisplayReview={this.state.isDisplayReview}
+              toggleShowReview={this.toggleShowReview}
+              course={this.state.course}
+              reviews={this.state.reviews}
+              averageReview={this.state.averageReview}
+            />
+          </div>
+        </Fade>
 
-          <RenderTiles
-            isDisplayReview={this.state.isDisplayReview}
-            toggleShowReview={this.toggleShowReview}
-            course={this.state.course}
-            reviews={this.state.reviews}
-            averageReview={this.state.averageReview}
-          />
-        </div>
         <RenderContent
           isDisplayReview={this.state.isDisplayReview}
           course={this.state.course}
@@ -356,32 +360,40 @@ function RenderContent(props) {
   if (props.isDisplayReview === false) {
     return (
       <div className="course-body">
-        <div className="course-body-left">
-          <div className="course-body-description">
-            {props.course.description}
+        <Fade left>
+          <div className="course-body-left">
+            <div className="course-body-description">
+              {props.course.description}
+            </div>
+            <div className="course-body-prereq">
+              Course Prerequisites: {props.course.prerequisite}
+            </div>
           </div>
-          <div className="course-body-prereq">
-            Course Prerequisites: {props.course.prerequisite}
+        </Fade>
+        <LightSpeed right>
+          <div className="course-body-right">
+            <img src={course} alt="course-logo" />
           </div>
-        </div>
-        <div className="course-body-right">
-          <img src={course} alt="course-logo" />
-        </div>
+        </LightSpeed>
       </div>
     );
   } else {
     return (
       <div className="course-body">
         <div className="course-final-body-review">
-          {props.reviews.map(review => (
-            <Reviewcard
-              title={review.title}
-              rating={review.rating}
-              content={review.description}
-              date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
-              reviewUsername={review.username}
-            />
-          ))}
+          {props.reviews.length === 0 ? (
+            <h1 className="course-body-description">No Reviews</h1>
+          ) : (
+            props.reviews.map(review => (
+              <Reviewcard
+                title={review.title}
+                rating={review.rating}
+                content={review.description}
+                date={moment(review.createdAt).format("h:mm a, Do MMM YYYY")}
+                reviewUsername={review.username}
+              />
+            ))
+          )}
         </div>
       </div>
     );
