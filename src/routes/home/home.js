@@ -6,9 +6,8 @@ import Fade from "react-reveal/Fade";
 
 //assets
 import homeForeground from "../../images/home-foreground.svg";
-import homeBackground from "../../images/home-background.svg"
+import homeBackground from "../../images/home-background.svg";
 import planet from "../../images/planet.svg";
-import ring from "../../images/ring.svg";
 import Title from "../../components/title/title";
 import Status from "../../components/status/status";
 import "./home.css";
@@ -61,10 +60,10 @@ class Home extends Component {
   };
   render() {
     return (
-      <div className="App home-background">
+      <div className="App">
         <Fade>
           <div className="image-container">
-          <img src={homeBackground} className="home-image" alt="home" />
+            <img src={homeBackground} className="home-image" alt="home" />
             <div id="stars-group-2"></div>
             <div id="stars-group-3"></div>
             <div id="stars-group-4"></div>
