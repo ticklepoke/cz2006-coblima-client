@@ -8,7 +8,9 @@ html {
 
 .home-image {
   /* height: 95%; */
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
+  width: 100%;
   top: 0;
   left: 0;
 }
@@ -53,4 +55,69 @@ html {
 
 .no-underline {
   text-decoration: none !important;
+}
+
+.image-container {
+  /* border: 1px solid red; */
+  position: absolute;
+  height: 100%;
+  width: 70%;
+}
+
+/* .ring-image {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 55%;
+} */
+.oval-shape {
+  /* border: 4px solid white; */
+  position: absolute;
+  bottom: 21%;
+  left: 0%;
+  height: 33%;
+  width: 50%;
+  border-radius: 50%;
+  /* background-color: white; */
+  transform: rotate(-15deg);
+}
+
+.planet-image {
+  position: absolute;
+  top: 42%;
+  left: 18%;
+  animation-name: orbit;
+  animation-duration: 5s;
+  /* animation-timing-function: cubic-bezier(); */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes orbit {
+  from {
+    -webkit-transform: rotate(0deg) translateX(400px) rotate(0deg);
+    height: 100px;
+  }
+
+  24% {
+    height: 120px;
+  }
+  43% {
+    opacity: 1;
+  }
+  47% {
+    opacity: 0;
+    height: 40px;
+  }
+  95% {
+    opacity: 0;
+    height: 50px;
+  }
+  99% {
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(360deg) translateX(400px) rotate(-360deg);
+    height: 100px;
+  }
 }
